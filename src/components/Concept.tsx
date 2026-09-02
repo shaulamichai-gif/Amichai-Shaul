@@ -152,16 +152,16 @@ export default function Concept() {
             <div className="lg:col-span-5 bg-schlei-900/60 rounded-xl p-6 border border-white/5 flex flex-col justify-between h-full">
               <div className="text-center mb-4">
                 <span className="text-3xl">🛎️</span>
-                <h5 className="font-serif text-lg font-bold text-white mt-2">Planen Sie Ihr Tischbuffet</h5>
+                <h5 className="font-serif text-lg font-bold text-white mt-2">Unsere Speisekarte</h5>
                 <p className="text-xs text-slate-400 mt-1 font-light">
-                  Nutzen Sie unseren interaktiven Tisch-Kalkulator weiter unten, um Speisen auszuwählen, die Verteilung zu prüfen und Ihr perfektes Buffet zusammenzustellen!
+                  Werfen Sie einen Blick auf unsere ausgewählte Speisekarte weiter unten und stellen Sie Ihr perfektes Tischbuffet ganz nach Ihren Wünschen zusammen!
                 </p>
               </div>
               <a 
                 href="#speisekarte" 
                 className="w-full text-center bg-gold-500/10 hover:bg-gold-500 text-gold-400 hover:text-schlei-900 border border-gold-500/30 font-bold py-3 px-4 rounded-lg text-xs uppercase tracking-wider transition-all"
               >
-                Zum Tisch-Kalkulator
+                Zur Speisekarte
               </a>
             </div>
 

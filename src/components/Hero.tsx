@@ -8,8 +8,8 @@ export default function Hero() {
       name: 'Würziges Crispyhuhn',
       price: '13,50 €',
       description: 'Nam Pla* / Mango / Limette / Rote Chili / Sesam',
-      imageUrl: 'https://lh3.googleusercontent.com/d/13bAVhVpkUhQfvtDLeT6BUKiwB-0ch_y1',
-      fallbackUrl: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80'
+      imageUrl: '/assets/IMG_1795.PNG',
+      fallbackUrl: '/assets/crispy_huhn.jpg'
     },
     {
       name: 'Gerösteter Fetakäse',

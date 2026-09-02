@@ -1,22 +1,630 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Am Schleieck | Maasholm | Von der Ostsee über's Mittelmeer bis nach Asien</title>
-    <meta name="description" content="Erleben Sie die kulinarische Vielfalt von der Ostsee über das Mittelmeer bis nach Asien mit unserem innovativen Sharing-Konzept und Tischbuffet-System." />
-    <meta property="og:title" content="Restaurant Am Schleieck" />
-    <meta property="og:description" content="Erleben Sie die kulinarische Vielfalt von der Ostsee über das Mittelmeer bis nach Asien mit unserem innovativen Sharing-Konzept und Tischbuffet-System." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-[#07181e] text-slate-100 font-sans antialiased selection:bg-[#d4af37] selection:text-[#07181e]">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        schlei: {
+                            50: '#f0f7f9',
+                            100: '#e0eff3',
+                            700: '#1b4d5a',
+                            800: '#0f2931',
+                            900: '#07181e',
+                        },
+                        gold: {
+                            400: '#e5c158',
+                            500: '#d4af37',
+                            600: '#b89225',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-bg {
+            background: linear-gradient(180deg, rgba(7, 24, 30, 0.70) 0%, rgba(7, 24, 30, 0.88) 60%, rgba(7, 24, 30, 0.98) 100%),
+                        url('https://lh3.googleusercontent.com/d/1DBMsHd1nf9UqN_QUQsXT4sz039MqZyN4') center center/cover no-repeat;
+        }
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1.5px solid rgba(255, 255, 255, 0.8);
+        }
+        .glass-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #ffffff;
+        }
+        .glass-btn-gold {
+            background: rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1.5px solid rgba(212, 175, 55, 0.8);
+        }
+        .glass-btn-gold:hover {
+            background: rgba(212, 175, 55, 0.35);
+            border-color: #e5c158;
+        }
+        .blur-card {
+            background: rgba(15, 41, 49, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.18);
+        }
+    </style>
+</head>
+<body class="bg-schlei-900 text-slate-100 font-sans selection:bg-gold-500 selection:text-schlei-900">
 
+    <!-- Header / Nav bar (Sprach-Button entfernt) -->
+    <header class="fixed w-full top-0 z-50 bg-schlei-900/90 backdrop-blur-md border-b border-white/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="group block leading-tight">
+                    <span class="font-serif text-xl sm:text-2xl font-bold tracking-wider text-white block">AM SCHLEIECK</span>
+                    <span class="text-[9px] tracking-widest text-gold-400 uppercase font-light block whitespace-nowrap">Maasholm • Fusion Kitchen</span>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center space-x-7 text-sm font-medium tracking-wide">
+                    <a href="#speisekarte" class="text-slate-200 hover:text-gold-400 transition">Speisekarte</a>
+                    <a href="#konzept" class="text-slate-200 hover:text-gold-400 transition">Konzept</a>
+                    <a href="#oeffnungszeiten" class="text-slate-200 hover:text-gold-400 transition">Öffnungszeiten</a>
+                    <a href="#impressionen" class="text-slate-200 hover:text-gold-400 transition">Impressionen</a>
+                    <a href="#reservierung" class="text-slate-200 hover:text-gold-400 transition">Reservieren</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="text-slate-200 hover:text-gold-400 p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-schlei-800 border-b border-white/10 px-4 pt-3 pb-6 space-y-3 text-center">
+            <a href="#speisekarte" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Speisekarte</a>
+            <a href="#konzept" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Konzept</a>
+            <a href="#oeffnungszeiten" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Öffnungszeiten</a>
+            <a href="#impressionen" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Impressionen</a>
+            <a href="#reservierung" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Reservieren</a>
+            <a href="#reservierung" onclick="toggleMobileMenu()" class="inline-block mt-2 bg-gold-500 text-schlei-900 text-xs uppercase font-bold px-6 py-3 rounded">Tisch Reservieren</a>
+        </div>
+    </header>
+
+    <!-- Hero Section (Mit den Konzept-Bildern nach oben getauscht) -->
+    <section class="relative min-h-screen flex flex-col justify-center items-center hero-bg pt-28 pb-16">
+        <div class="relative max-w-7xl mx-auto px-4 text-center z-10 my-auto">
+            
+            <!-- Main Motto line -->
+            <h1 class="font-serif text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4 leading-tight whitespace-normal md:whitespace-nowrap">
+                Von der Ostsee über’s Mittelmeer bis nach Asien.
+            </h1>
+
+            <!-- Subtitle line -->
+            <h2 class="font-serif text-2xl sm:text-4xl md:text-5xl font-normal italic text-gold-400 mb-4">
+                Weil Teilen glücklich macht.
+            </h2>
+
+            <p class="font-serif text-lg sm:text-2xl font-light text-slate-100 mb-6 tracking-wide">
+                Drei Welten. Ein Geschmackserlebnis.
+            </p>
+
+            <!-- User Text -->
+            <p class="text-slate-200 text-sm sm:text-base md:text-lg max-w-4xl mx-auto mb-6 leading-relaxed font-light">
+                Ein Teller ist uns zu wenig. Bei uns geht es um's Erleben – kleine Gerichte, große Vielfalt. Bestellen Sie, worauf Sie Lust haben. Kombinieren und teilen Sie nach Belieben mit Freunden und Familie – und genießen Sie unsere internationale Küche als „Tischbuffet“ gemeinsam Stück für Stück.
+            </p>
+
+            <!-- Hinweis ab 10 Personen -->
+            <div class="inline-block bg-schlei-900/80 border border-gold-500/40 rounded-full px-5 py-2 text-xs sm:text-sm text-gold-400 mb-10 tracking-wide shadow-lg">
+                <i class="fa-solid fa-circle-info mr-2"></i> Ab 10 Personen benötigen wir eine Vorbestellung.
+            </div>
+
+            <!-- Hero Images (Hier die ehemaligen Unteren Bilder platziert) -->
+            <div class="grid sm:grid-cols-3 gap-6 max-w-6xl mx-auto text-left mb-10">
+                <div class="blur-card rounded-2xl overflow-hidden border border-gold-500/30 group hover:border-gold-400 transition shadow-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="h-64 sm:h-72 overflow-hidden relative bg-schlei-900">
+                            <img src="https://lh3.googleusercontent.com/d/1h-j8XoTZpKFjQJ7RRTtMYvQqujcze4bp" 
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80';"
+                                 alt="Spitzkohl aus dem Ofen" 
+                                 class="w-full h-full object-cover object-[center_60%] group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-schlei-900/90 via-transparent to-transparent opacity-60"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blur-card rounded-2xl overflow-hidden border border-gold-500/30 group hover:border-gold-400 transition shadow-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="h-64 sm:h-72 overflow-hidden relative bg-schlei-900">
+                            <img src="https://lh3.googleusercontent.com/d/13bAVhVpkUhQfvtDLeT6BUKiwB-0ch_y1" 
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80';"
+                                 alt="Würziges Crispyhuhn" 
+                                 class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-schlei-900/90 via-transparent to-transparent opacity-60"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blur-card rounded-2xl overflow-hidden border border-gold-500/30 group hover:border-gold-400 transition shadow-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="h-64 sm:h-72 overflow-hidden relative bg-schlei-900">
+                            <img src="https://lh3.googleusercontent.com/d/1IZMWGmhACFPWGC1OHzq5OEdJti_uTBHT" 
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=800&q=80';"
+                                 alt="Dry-Aged Burger-Patty" 
+                                 class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-schlei-900/90 via-transparent to-transparent opacity-60"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap justify-center items-center gap-4 max-w-3xl mx-auto">
+                <a href="#reservierung" class="glass-btn-gold text-white font-bold px-6 py-3.5 rounded-lg text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 transition shadow-xl">
+                    <i class="fa-regular fa-calendar-check text-gold-400"></i> Tisch Reservieren
+                </a>
+                
+                <a href="#oeffnungszeiten" class="glass-btn text-white font-bold px-6 py-3.5 rounded-lg text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 transition">
+                    <i class="fa-solid fa-clock text-gold-400"></i> Öffnungszeiten
+                </a>
+
+                <a href="#speisekarte" class="glass-btn text-white font-bold px-6 py-3.5 rounded-lg text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 transition">
+                    <i class="fa-solid fa-utensils text-slate-300"></i> Zur Speisekarte
+                </a>
+            </div>
+
+        </div>
+
+        <a href="#konzept" class="mt-8 text-gold-400/80 hover:text-gold-400 animate-bounce">
+            <i class="fa-solid fa-chevron-down text-xl"></i>
+        </a>
+    </section>
+
+    <!-- Concept Section (Textlos, größere Bilder, hier die ehemaligen oberen Bilder platziert) -->
+    <section id="konzept" class="py-24 bg-schlei-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3 block">Neu im Schleieck</span>
+                <h3 class="font-serif text-3xl sm:text-5xl font-bold text-white mb-4">„Gesellig & Genießen“</h3>
+                <p class="font-serif italic text-xl text-gold-400 mb-4">Ein Teller ist uns zu wenig. Bei uns geht es ums Erleben.</p>
+                
+                <p class="text-xs sm:text-sm text-gold-300/90 mb-6 bg-schlei-900/50 py-2 px-4 rounded-lg inline-block border border-gold-500/20">
+                    <i class="fa-solid fa-circle-info mr-1"></i> Ab 10 Personen benötigen wir eine Vorbestellung.
+                </p>
+
+                <div class="w-16 h-0.5 bg-gold-500 mx-auto mb-6"></div>
+                <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                    Bestellen Sie, worauf Sie Lust haben. Kombinieren und teilen Sie nach Belieben mit Freunden und Familie – und genießen Sie unsere internationale Küche als exklusives <strong>„Tischbuffet“</strong> gemeinsam Stück für Stück.
+                </p>
+            </div>
+
+            <!-- Concept Images (Text komplett entfernt, Bilder größer, getauscht) -->
+            <div class="grid sm:grid-cols-3 gap-6 max-w-6xl mx-auto text-left mb-16">
+                <div class="blur-card rounded-2xl overflow-hidden border border-gold-500/30 shadow-xl">
+                    <img src="https://lh3.googleusercontent.com/d/1DBMsHd1nf9UqN_QUQsXT4sz039MqZyN4" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80';"
+                         alt="Kulinarische Vielfalt" class="w-full h-80 sm:h-96 object-cover object-[center_60%]">
+                </div>
+
+                <div class="blur-card rounded-2xl overflow-hidden border border-gold-500/30 shadow-xl">
+                    <img src="https://lh3.googleusercontent.com/d/1IZMWGmhACFPWGC1OHzq5OEdJti_uTBHT" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80';"
+                         alt="Gemeinsam Genießen" class="w-full h-80 sm:h-96 object-cover object-center">
+                </div>
+
+                <div class="blur-card rounded-2xl overflow-hidden border border-gold-500/30 shadow-xl">
+                    <img src="https://lh3.googleusercontent.com/d/1MFHMrUKlpd8lf2b4C6Db3BXHgbNunk_a" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=800&q=80';"
+                         alt="Frische & Leidenschaft" class="w-full h-80 sm:h-96 object-cover object-center">
+                </div>
+            </div>
+
+            <div class="bg-schlei-900 rounded-2xl p-8 border border-gold-500/20">
+                <div class="text-center mb-8">
+                    <h4 class="font-serif text-2xl font-bold text-white">Drei Welten auf Ihrem Tisch</h4>
+                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest">Die Kulinarische Schleieck-Formel</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="p-5 rounded-xl bg-schlei-800/60 border border-white/5">
+                        <div class="text-4xl mb-3">🌊</div>
+                        <h5 class="font-serif text-xl font-bold text-gold-400 mb-2">Ostsee</h5>
+                        <p class="text-xs text-slate-300">Fangfrischer Dorsch, Scholle, SH-Färse Rind & regionale Zutaten direkt von der Küste.</p>
+                    </div>
+                    <div class="p-5 rounded-xl bg-schlei-800/60 border border-white/5">
+                        <div class="text-4xl mb-3">☀️</div>
+                        <h5 class="font-serif text-xl font-bold text-gold-400 mb-2">Mittelmeer</h5>
+                        <p class="text-xs text-slate-300">Cremige Burrata, Schafskäse, Piccata Milanese, Harissa, Pesto & sonnenreife Tomaten.</p>
+                    </div>
+                    <div class="p-5 rounded-xl bg-schlei-800/60 border border-white/5">
+                        <div class="text-4xl mb-3">🌿</div>
+                        <h5 class="font-serif text-xl font-bold text-gold-400 mb-2">Asien</h5>
+                        <p class="text-xs text-slate-300">Rotes Thai Curry, Wakame Algen, Miso Glaze, Nam Pla, Mango-Chutney & Sesam.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Öffnungszeiten Section -->
+    <section id="oeffnungszeiten" class="py-24 bg-schlei-900 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3 block">Wann wir für Sie da sind</span>
+            <h3 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-6">Öffnungszeiten</h3>
+            <div class="w-16 h-0.5 bg-gold-500 mx-auto mb-10"></div>
+
+            <div class="blur-card rounded-3xl p-8 sm:p-12 border border-gold-500/30 space-y-8">
+                <div>
+                    <h4 class="font-serif text-2xl font-bold text-gold-400 mb-2">Dienstag, Donnerstag, Freitag & Samstag</h4>
+                    <p class="text-white text-lg font-medium">17:00 – 22:00 Uhr</p>
+                    <p class="text-xs text-slate-300 mt-1">Warme Küche von 17:00 – 20:30 Uhr</p>
+                </div>
+
+                <div class="border-t border-white/10 pt-6">
+                    <h4 class="font-serif text-2xl font-bold text-gold-400 mb-2">Sonn- und Feiertage</h4>
+                    <p class="text-white text-lg font-medium">17:00 – 22:00 Uhr geöffnet</p>
+                    <p class="text-xs text-slate-300 mt-1">Warme Küche von 17:00 – 20:00 Uhr</p>
+                </div>
+
+                <div class="border-t border-white/10 pt-6">
+                    <h4 class="font-serif text-xl font-bold text-slate-300 mb-1">Ruhetage</h4>
+                    <p class="text-gold-400/90 text-sm font-medium">Montag und Mittwoch</p>
+                </div>
+
+                <div class="border-t border-white/10 pt-6 bg-schlei-800/50 rounded-2xl p-6 border border-gold-500/10">
+                    <p class="text-sm text-slate-200 mb-2">
+                        <i class="fa-solid fa-phone text-gold-400 mr-2"></i> Telefon: <a href="tel:046426016" class="text-gold-400 hover:underline font-bold">04642-6016</a>
+                    </p>
+                    <p class="text-xs text-slate-300 mb-1">Tischreservierungen bitte über den Link unten.</p>
+                    <p class="text-xs text-amber-300/90 mt-2">
+                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> Für die Terrasse nehmen wir keine Reservierungen entgegen, kommen Sie einfach vorbei.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impressionen Section -->
+    <section id="impressionen" class="py-20 bg-schlei-800 border-t border-slate-700/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="text-gold-400 text-xs font-bold uppercase tracking-widest mb-2 block">Einblick & Atmosphäre</span>
+            <h3 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-8">Impressionen aus Maasholm</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="rounded-2xl overflow-hidden border border-gold-500/20 shadow-2xl">
+                    <img src="https://lh3.googleusercontent.com/d/1DBMsHd1nf9UqN_QUQsXT4sz039MqZyN4" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80';"
+                         alt="Gourmet Gericht Am Schleieck" class="w-full h-72 object-cover object-[center_35%] hover:scale-105 transition duration-500">
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-gold-500/20 shadow-2xl">
+                    <img src="https://lh3.googleusercontent.com/d/1IZMWGmhACFPWGC1OHzq5OEdJti_uTBHT" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=1000&q=80';"
+                         alt="Speisen-Kreation Schleieck" class="w-full h-72 object-cover object-[center_35%] hover:scale-105 transition duration-500">
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-gold-500/20 shadow-2xl">
+                    <img src="https://lh3.googleusercontent.com/d/1MFHMrUKlpd8lf2b4C6Db3BXHgbNunk_a" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1000&q=80';"
+                         alt="Frische Zubereitung" class="w-full h-72 object-cover object-[center_35%] hover:scale-105 transition duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speisekarte Section (Mit Dry-Aged Burger-Patty) -->
+    <section id="speisekarte" class="py-24 bg-schlei-900 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3 block">Unsere Speisekarte</span>
+                <h3 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-3">Gesellig & Genießen</h3>
+                <p class="text-xs sm:text-sm text-gold-300 mb-4 bg-schlei-800/80 py-2 px-4 rounded-lg inline-block border border-gold-500/30">
+                    <i class="fa-solid fa-circle-info mr-1"></i> Ab 10 Personen benötigen wir eine Vorbestellung.
+                </p>
+                <div class="w-16 h-0.5 bg-gold-500 mx-auto mb-4"></div>
+                <p class="text-slate-300 text-sm italic">
+                    (Unser Tipp: 2 Gerichte pro Person entsprechen in etwa einem klassischen Hauptgericht)
+                </p>
+            </div>
+
+            <!-- Clean Menu List -->
+            <div class="space-y-12">
+                <!-- Sharing Section -->
+                <div class="blur-card rounded-2xl p-8 sm:p-10 border border-gold-500/30">
+                    <h4 class="font-serif text-2xl font-bold text-gold-400 mb-8 pb-3 border-b border-gold-500/30 flex items-center justify-between">
+                        <span>Sharing-Karte</span>
+                        <span class="text-xs font-sans text-slate-300 uppercase tracking-wider">Kleine Gerichte • Große Vielfalt</span>
+                    </h4>
+
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-baseline border-b border-white/5 pb-4">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">Brotzeit <span class="text-xs text-emerald-400 font-sans">(V)</span></span>
+                                <p class="text-xs text-slate-300 mt-1">Knoblauch-Aioli / Tomaten-Chili-Salsa</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">7,50 €</span>
+                        </div>
+
+                        <div class="flex justify-between items-baseline border-b border-white/5 pb-4">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">Thunfisch Tartar</span>
+                                <p class="text-xs text-slate-300 mt-1">Rotes Thai Curry / Wakame Algen / Mango / Limette / Kokos</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">13,50 €</span>
+                        </div>
+
+                        <div class="flex justify-between items-baseline border-b border-white/5 pb-4">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">Riesengarnele</span>
+                                <p class="text-xs text-slate-300 mt-1">Burrata / Kirschtomate / Olive / Basilikum Pesto</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">14,90 €</span>
+                        </div>
+
+                        <div class="flex justify-between items-baseline border-b border-white/5 pb-4">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">Dorschfilet à la Schleieck</span>
+                                <p class="text-xs text-slate-300 mt-1">Remoulade / Kartoffeln / Salat</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">13,90 €</span>
+                        </div>
+
+                        <div class="flex justify-between items-baseline border-b border-white/5 pb-4">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">Piccata Milanese von Dorsch & Garnele</span>
+                                <p class="text-xs text-slate-300 mt-1">Kirschtomatenragout / geriebener Hartkäse</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">14,90 €</span>
+                        </div>
+
+                        <div class="flex justify-between items-baseline border-b border-white/5 pb-4">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">Filet vom Loup de Mer</span>
+                                <p class="text-xs text-slate-300 mt-1">Kirschtomatenragout / Chilibohne / Olive / Schafskäse</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">13,90 €</span>
+                        </div>
+
+                        <div class="flex justify-between items-baseline border-b border-white/5 pb-4">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">Schollenfilet</span>
+                                <p class="text-xs text-slate-300 mt-1">Limetten-Buttersauce / Blattspinat / Kartoffeln</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">14,50 €</span>
+                        </div>
+
+                        <!-- Aktualisierter Dry-Aged Burger-Patty -->
+                        <div class="flex justify-between items-baseline border-b border-white/5 pb-4">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">Dry-Aged Burger-Patty</span>
+                                <p class="text-xs text-slate-300 mt-1">Knackiger Salat • pikante Chili-Aioli • Tortilla • Röstzwiebeln</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">13,90 €</span>
+                        </div>
+
+                        <div class="flex justify-between items-baseline border-b border-white/5 pb-4">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">Würziges Crispyhuhn</span>
+                                <p class="text-xs text-slate-300 mt-1">Nam Pla* / Mango / Limette / Rote Chili / Sesam</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">13,50 €</span>
+                        </div>
+
+                        <div class="flex justify-between items-baseline border-b border-white/5 pb-4">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">Spitzkohl aus dem Ofen <span class="text-xs text-emerald-400 font-sans">(V)</span></span>
+                                <p class="text-xs text-slate-300 mt-1">Miso* / Sesampaste / Falafel / Mango-Chutney / geröstete Mandel</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">13,50 €</span>
+                        </div>
+
+                        <div class="flex justify-between items-baseline border-b border-white/5 pb-4">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">Gerösteter Fetakäse</span>
+                                <p class="text-xs text-slate-300 mt-1">Filoteig / Harissa* / Kirschtomate / Blattspinat / Olive / Zitrone</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">13,50 €</span>
+                        </div>
+
+                        <div class="flex justify-between items-baseline pb-2">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">Mediterraner Falafelteller <span class="text-xs text-emerald-400 font-sans">(V)</span></span>
+                                <p class="text-xs text-slate-300 mt-1">Mandelknoblauch-Creme / Chili-Salsa / Sumak Salat</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">13,50 €</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kids Section -->
+                <div class="blur-card rounded-2xl p-8 sm:p-10 border border-gold-500/30">
+                    <h4 class="font-serif text-2xl font-bold text-gold-400 mb-8 pb-3 border-b border-gold-500/30">
+                        Nur für unsere kleinen Gäste
+                    </h4>
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-baseline border-b border-white/5 pb-4">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">Neptun-Teller</span>
+                                <p class="text-xs text-slate-300 mt-1">Kleines Dorschfilet / Röstkartoffeln / Salatgarnitur</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">7,90 €</span>
+                        </div>
+                        <div class="flex justify-between items-baseline pb-2">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">Chip & Chap</span>
+                                <p class="text-xs text-slate-300 mt-1">Chicken-Nuggets / Pommes-frites / Salatgarnitur</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">7,90 €</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desserts Section -->
+                <div class="blur-card rounded-2xl p-8 sm:p-10 border border-gold-500/30">
+                    <h4 class="font-serif text-2xl font-bold text-gold-400 mb-8 pb-3 border-b border-gold-500/30 flex items-center justify-between">
+                        <span>Dessert</span>
+                        <span class="text-xs font-sans text-slate-300 uppercase tracking-wider">Süßer Abschluss</span>
+                    </h4>
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-baseline border-b border-white/5 pb-4">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">1 Kugel hausgemachtes Weiße Schokoladen-Mohn-Eis</span>
+                                <p class="text-xs text-slate-300 mt-1">Serviert mit Roter Grütze</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">4,50 €</span>
+                        </div>
+                        <div class="flex justify-between items-baseline border-b border-white/5 pb-4">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">Nougat-Pistazienparfait</span>
+                                <p class="text-xs text-slate-300 mt-1">Karamell-Feigensauce / Biskuit-Nuss Crumble</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">9,80 €</span>
+                        </div>
+                        <div class="flex justify-between items-baseline pb-2">
+                            <div>
+                                <span class="font-serif text-lg font-bold text-white">Schokoladen Tiramisu-Kugeln</span>
+                                <p class="text-xs text-slate-300 mt-1">Mascarpone / Vanille / Madagaskar Kakao</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">10,50 €</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footnotes -->
+            <div class="mt-12 text-center text-xs text-slate-400 border-t border-slate-800 pt-6">
+                <p class="mb-1">* Erklärung Spezial-Zutaten: <strong>Nam Pla</strong> = Asiatische Fischsauce | <strong>Miso</strong> = Japanische Sojabohnenpaste | <strong>Harissa</strong> = Nordafrikanische Gewürzpaste</p>
+                <p>(V) = Dieses Gericht ist 100% Vegan</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section id="reservierung" class="py-24 bg-schlei-900 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="blur-card rounded-3xl p-8 sm:p-12 border border-gold-500/30">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="text-gold-400 text-xs font-bold uppercase tracking-widest block mb-2">Geselligkeit Erleben</span>
+                    <h3 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-3">Tisch Reservieren</h3>
+                    <p class="text-slate-300 text-sm">Sichern Sie sich Ihren Tisch im Restaurant Am Schleieck in Maasholm.</p>
+                </div>
+
+                <form id="resForm" onsubmit="handleReservation(event)" class="space-y-6">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-slate-300 mb-2">Datum *</label>
+                            <input type="date" required class="w-full bg-schlei-800 border border-gold-500/20 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-gold-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-slate-300 mb-2">Uhrzeit *</label>
+                            <select required class="w-full bg-schlei-800 border border-gold-500/20 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-gold-400">
+                                <option value="">Bitte wählen...</option>
+                                <option>17:00 Uhr</option>
+                                <option>17:30 Uhr</option>
+                                <option>18:00 Uhr</option>
+                                <option>18:30 Uhr</option>
+                                <option>19:00 Uhr</option>
+                                <option>19:30 Uhr</option>
+                                <option>20:00 Uhr</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-slate-300 mb-2">Personen *</label>
+                            <select required class="w-full bg-schlei-800 border border-gold-500/20 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-gold-400">
+                                <option value="2">2 Personen</option>
+                                <option value="3">3 Personen</option>
+                                <option value="4">4 Personen (Ideal für Sharing!)</option>
+                                <option value="5">5 Personen</option>
+                                <option value="6">6+ Personen</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-slate-300 mb-2">Name *</label>
+                            <input type="text" placeholder="Vor- und Nachname" required class="w-full bg-schlei-800 border border-gold-500/20 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-gold-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-slate-300 mb-2">E-Mail *</label>
+                            <input type="email" placeholder="name@beispiel.de" required class="w-full bg-schlei-800 border border-gold-500/20 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-gold-400">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-slate-300 mb-2">Telefon *</label>
+                        <input type="tel" placeholder="+49 170 1234567" required class="w-full bg-schlei-800 border border-gold-500/20 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-gold-400">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-slate-300 mb-2">Anmerkungen & Wünsche</label>
+                        <textarea rows="3" placeholder="Sonderwünsche, Allergien oder Hinweis zum Sharing-Tisch..." class="w-full bg-schlei-800 border border-gold-500/20 rounded-lg p-3 text-sm text-white focus:outline-none focus:border-gold-400"></textarea>
+                    </div>
+
+                    <div class="text-center pt-2">
+                        <button type="submit" class="w-full sm:w-auto bg-gold-500 hover:bg-gold-400 text-schlei-900 font-bold px-10 py-4 rounded-lg text-xs uppercase tracking-widest transition shadow-xl">
+                            <i class="fa-regular fa-calendar-check mr-2"></i> Tisch Verbindlich Buchen
+                        </button>
+                    </div>
+                </form>
+
+                <div id="resSuccess" class="hidden text-center py-8">
+                    <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 border border-emerald-500 rounded-full flex items-center justify-center mx-auto text-3xl mb-4">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h4 class="font-serif text-2xl font-bold text-white mb-2">Vielen Dank für Ihre Reservierung!</h4>
+                    <p class="text-slate-300 text-sm max-w-md mx-auto">Ihre Anfrage wurde erfolgreich aufgenommen. Wir bestätigen Ihren Termin in Kürze per E-Mail.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-schlei-900 border-t border-white/10 py-12 text-slate-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <span class="font-serif text-white font-bold tracking-wider">AM SCHLEIECK</span>
+                <span>•</span>
+                <span>Maasholm an der Schlei</span>
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-gold-400 transition">Impressum</a>
+                <a href="#" class="hover:text-gold-400 transition">Datenschutz</a>
+                <a href="#speisekarte" class="hover:text-gold-400 transition">Speisekarte</a>
+            </div>
+            <div>
+                © 2026 Restaurant Am Schleieck. Alle Rechte vorbehalten.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function handleReservation(event) {
+            event.preventDefault();
+            document.getElementById('resForm').classList.add('hidden');
+            document.getElementById('resSuccess').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

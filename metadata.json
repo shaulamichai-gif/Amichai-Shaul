@@ -1,6 +1,6 @@
 {
   "name": "Restaurant Am Schleieck",
-  "description": "Erleben Sie die kulinarische Vielfalt von der Ostsee über das Mittelmeer bis nach Asien mit unserem innovativen Sharing-Konzept und Tischbuffet-System.",
+  "description": "Von der Ostsee über’s Mittelmeer bis nach Asien. Weil Teilen glücklich macht - Restaurant Am Schleieck in Maasholm.",
   "Overwrite": true,
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]

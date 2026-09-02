@@ -105,7 +105,7 @@ export const MENU_ITEMS: MenuItem[] = [
     category: 'sharing',
     cuisine: 'asien',
     ingredients: ['Hähnchenbrust knusprig', 'Nam Pla (Asiatische Fischsauce)', 'Mango', 'Limette', 'Rote Chili', 'Sesam'],
-    imageUrl: 'https://lh3.googleusercontent.com/d/13bAVhVpkUhQfvtDLeT6BUKiwB-0ch_y1',
+    imageUrl: '/assets/IMG_1795.PNG',
     accentNote: 'Knusprig-Feurig'
   },
   {
