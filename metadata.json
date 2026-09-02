@@ -1,0 +1,7 @@
+{
+  "name": "Restaurant Am Schleieck",
+  "description": "Erleben Sie die kulinarische Vielfalt von der Ostsee über das Mittelmeer bis nach Asien mit unserem innovativen Sharing-Konzept und Tischbuffet-System.",
+  "Overwrite": true,
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
