@@ -1,4 +1,4 @@
-import { Clock, Phone, MapPin, AlertTriangle, Compass } from 'lucide-react';
+import { Clock, Phone, MapPin, AlertTriangle, Compass, Mail } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function OpeningHours() {
@@ -93,6 +93,16 @@ export default function OpeningHours() {
                       <span className="text-slate-400 block font-medium">Telefonische Auskunft:</span>
                       <a href="tel:046426016" className="text-gold-400 font-bold hover:underline block mt-0.5">
                         04642 - 6016
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2.5 items-start">
+                    <Mail className="w-4 h-4 text-gold-400 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="text-slate-400 block font-medium">E-Mail für Reservierungen:</span>
+                      <a href="mailto:amichai@gmx.de" className="text-gold-400 font-bold hover:underline block mt-0.5">
+                        amichai@gmx.de
                       </a>
                     </div>
                   </div>

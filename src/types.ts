@@ -24,4 +24,6 @@ export interface Reservation {
   status: 'angefragt' | 'bestaetigt' | 'storniert';
   createdAt: string;
   selectedDishes?: { menuItemId: string; quantity: number }[];
+  emailSentTo?: string;
+  emailStatus?: 'gesendet' | 'ausstehend' | 'aktivierung_erforderlich' | 'fehler';
 }

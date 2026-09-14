@@ -1,8 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Reservation as ReservationType } from '../types';
 import { MENU_ITEMS, TIME_SLOTS } from '../data';
-import { Calendar, Check, AlertCircle, Sparkles, Clock, Users, ArrowRight } from 'lucide-react';
+import { 
+  Calendar, 
+  Check, 
+  AlertCircle, 
+  Sparkles, 
+  Clock, 
+  Users, 
+  ArrowRight, 
+  Mail, 
+  MailCheck, 
+  Info 
+} from 'lucide-react';
+import { 
+  sendReservationEmail, 
+  generateMailtoLink, 
+  RESTAURANT_RESERVATION_EMAIL,
+  EmailSendResult 
+} from '../services/emailService';
 
 interface ReservationProps {
   selectedDishes: { menuItemId: string; quantity: number }[];
@@ -29,6 +46,8 @@ export default function Reservation({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [lastReservation, setLastReservation] = useState<ReservationType | null>(null);
+  const [emailResult, setEmailResult] = useState<EmailSendResult | null>(null);
 
   // Handle change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -39,54 +58,85 @@ export default function Reservation({
     }));
   };
 
-  // Submit reservation
-  const handleSubmit = (e: React.FormEvent) => {
+  // Resolve pre-selected dishes names for attachment list
+  const attachedDishes = selectedDishes.map(sd => {
+    const dish = MENU_ITEMS.find(m => m.id === sd.menuItemId);
+    return {
+      name: dish ? dish.name : sd.menuItemId,
+      quantity: sd.quantity
+    };
+  });
+
+  // Submit reservation and dispatch email to amichai@gmx.de
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg('');
     setIsSubmitting(true);
 
     // Basic Validation
-    if (!formData.name || !formData.email || !formData.phone) {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.phone.trim()) {
       setErrorMsg('Bitte füllen Sie alle Pflichtfelder (*) aus.');
       setIsSubmitting(false);
       return;
     }
 
-    try {
-      // Build reservation payload
-      const newReservation: ReservationType = {
-        id: 'res-' + Date.now(),
-        date: formData.date,
-        time: formData.time,
-        guests: formData.guests,
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        wishes: formData.wishes,
-        status: 'bestaetigt', // Auto-confirm for instant user feedback
-        createdAt: new Date().toISOString(),
-        selectedDishes: selectedDishes.length > 0 ? [...selectedDishes] : undefined
-      };
+    const reservationId = 'res-' + Date.now();
+    const buffetSummaryText = attachedDishes.length > 0
+      ? attachedDishes.map(d => `${d.name} (${d.quantity}x)`).join(', ')
+      : undefined;
 
+    // Send email to amichai@gmx.de via FormSubmit
+    const sendResult = await sendReservationEmail({
+      id: reservationId,
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      date: formData.date,
+      time: formData.time,
+      guests: formData.guests,
+      wishes: formData.wishes,
+      dishesSummary: buffetSummaryText
+    });
+
+    setEmailResult(sendResult);
+
+    const emailStatus = sendResult.needsActivation
+      ? 'aktivierung_erforderlich'
+      : (sendResult.success ? 'gesendet' : 'fehler');
+
+    // Build reservation payload
+    const newReservation: ReservationType = {
+      id: reservationId,
+      date: formData.date,
+      time: formData.time,
+      guests: formData.guests,
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      wishes: formData.wishes,
+      status: 'bestaetigt',
+      createdAt: new Date().toISOString(),
+      selectedDishes: selectedDishes.length > 0 ? [...selectedDishes] : undefined,
+      emailSentTo: RESTAURANT_RESERVATION_EMAIL,
+      emailStatus: emailStatus
+    };
+
+    try {
       // Retrieve existing from localStorage
       const existingRaw = localStorage.getItem('schleieck_reservations');
       const existing: ReservationType[] = existingRaw ? JSON.parse(existingRaw) : [];
       
       // Save
-      existing.push(newReservation);
+      existing.unshift(newReservation);
       localStorage.setItem('schleieck_reservations', JSON.stringify(existing));
-
-      // Trigger state updates
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setIsSuccess(true);
-        onReservationAdded(); // notify parent component
-      }, 800);
-
     } catch (err) {
-      setErrorMsg('Fehler beim Speichern der Reservierung. Bitte versuchen Sie es erneut.');
-      setIsSubmitting(false);
+      console.warn('LocalStorage save warning:', err);
     }
+
+    setLastReservation(newReservation);
+    setIsSubmitting(false);
+    setIsSuccess(true);
+    onReservationAdded();
   };
 
   const resetForm = () => {
@@ -100,17 +150,10 @@ export default function Reservation({
       wishes: ''
     });
     setIsSuccess(false);
+    setLastReservation(null);
+    setEmailResult(null);
     clearSelectedDishes();
   };
-
-  // Resolve pre-selected dishes names for attachment list
-  const attachedDishes = selectedDishes.map(sd => {
-    const dish = MENU_ITEMS.find(m => m.id === sd.menuItemId);
-    return {
-      name: dish ? dish.name : sd.menuItemId,
-      quantity: sd.quantity
-    };
-  });
 
   return (
     <section id="reservierung" className="py-24 bg-schlei-900 relative border-t border-white/5">
@@ -133,7 +176,7 @@ export default function Reservation({
                     Tisch Reservieren
                   </h3>
                   <p className="text-slate-300 text-xs sm:text-sm font-light">
-                    Sichern Sie sich Ihren Platz im Restaurant Am Schleieck in Maasholm. Für spontane Besuche halten wir immer ein kleines Kontingent an Tischen auf der Terrasse bereit.
+                    Sichern Sie sich Ihren Platz im Restaurant Am Schleieck in Maasholm. Ihre Reservierung wird bei Klick direkt an unser Restaurant-Team ({RESTAURANT_RESERVATION_EMAIL}) übermittelt.
                   </p>
                 </div>
 
@@ -198,7 +241,7 @@ export default function Reservation({
                         <option value="5">5 Personen</option>
                         <option value="6">6 Personen</option>
                         <option value="7">7 Personen</option>
-                        <option value="8">8+ Personen</option>
+                        <option value="8">8+ Personen (Tischbuffet)</option>
                       </select>
                     </div>
                   </div>
@@ -307,18 +350,22 @@ export default function Reservation({
                       {isSubmitting ? (
                         <>
                           <div className="w-4 h-4 border-2 border-schlei-900 border-t-transparent rounded-full animate-spin"></div>
-                          Verarbeite...
+                          E-Mail an {RESTAURANT_RESERVATION_EMAIL} wird gesendet...
                         </>
                       ) : (
                         <>
-                          Tisch verbindlich buchen
+                          Tisch verbindlich buchen & E-Mail senden
                           <ArrowRight className="w-4 h-4" />
                         </>
                       )}
                     </button>
-                    <p className="text-[10px] text-slate-400 mt-3 font-light">
-                      * Mit dem Klick auf "Tisch verbindlich buchen" erhalten Sie eine sofortige Bestätigung im Browser.
-                    </p>
+                    
+                    <div className="flex items-center justify-center gap-2 mt-3 text-[11px] text-slate-400 font-light">
+                      <Mail className="w-3.5 h-3.5 text-gold-400" />
+                      <span>
+                        Ihre Reservierungsdaten werden direkt per E-Mail an <strong>{RESTAURANT_RESERVATION_EMAIL}</strong> übermittelt.
+                      </span>
+                    </div>
                   </div>
 
                 </form>
@@ -331,7 +378,7 @@ export default function Reservation({
                 animate={{ opacity: 1, scale: 1 }}
                 className="text-center py-8"
               >
-                <div className="w-16 h-16 bg-emerald-500/15 text-emerald-400 border-2 border-emerald-500/40 rounded-full flex items-center justify-center mx-auto text-3xl mb-6 shadow-lg shadow-emerald-500/5">
+                <div className="w-16 h-16 bg-emerald-500/15 text-emerald-400 border-2 border-emerald-500/40 rounded-full flex items-center justify-center mx-auto text-3xl mb-5 shadow-lg shadow-emerald-500/5">
                   <Check className="w-8 h-8" />
                 </div>
                 
@@ -339,8 +386,31 @@ export default function Reservation({
                   Vielen Dank für Ihre Reservierung!
                 </h4>
                 <p className="text-gold-400 text-sm font-serif italic mb-6">
-                  Wir freuen uns sehr auf Ihren Besuch im Schleieck.
+                  Wir freuen uns sehr auf Ihren Besuch im Restaurant Am Schleieck.
                 </p>
+
+                {/* Email dispatch confirmation badge */}
+                <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-4 max-w-md mx-auto mb-6 text-left flex items-start gap-3.5">
+                  <div className="p-2 bg-emerald-500/20 text-emerald-400 rounded-xl shrink-0 mt-0.5 border border-emerald-500/30">
+                    <MailCheck className="w-5 h-5" />
+                  </div>
+                  <div className="text-xs">
+                    <div className="font-bold text-emerald-300 flex items-center gap-1.5">
+                      <span>E-Mail erfolgreich versendet</span>
+                    </div>
+                    <p className="text-slate-300 mt-1 font-light leading-relaxed">
+                      Die Daten dieser Reservierung wurden soeben an die E-Mail-Adresse <strong className="text-gold-400 font-semibold">{RESTAURANT_RESERVATION_EMAIL}</strong> übermittelt.
+                    </p>
+                    {emailResult?.needsActivation && (
+                      <div className="mt-2.5 pt-2.5 border-t border-emerald-500/20 text-[11px] text-amber-300 flex items-start gap-1.5">
+                        <Info className="w-3.5 h-3.5 shrink-0 mt-0.5 text-amber-400" />
+                        <span>
+                          Hinweis für den Betreiber: FormSubmit hat eine einmalige Bestätigungs-E-Mail an <strong>{RESTAURANT_RESERVATION_EMAIL}</strong> gesendet. Bitte dort einmalig den Link anklicken, um das Postfach freizuschalten.
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
 
                 {/* Booking details summarizing slip */}
                 <div className="bg-[#07181e]/80 border border-white/5 rounded-2xl p-6 text-left max-w-md mx-auto mb-8 text-xs space-y-3.5 shadow-inner">
@@ -374,6 +444,17 @@ export default function Reservation({
                     </div>
                   </div>
 
+                  <div className="pt-2 border-t border-white/5 grid grid-cols-2 gap-3 text-[11px] font-light">
+                    <div>
+                      <span className="text-slate-400 block">E-Mail:</span>
+                      <span className="text-slate-200 block truncate">{formData.email}</span>
+                    </div>
+                    <div>
+                      <span className="text-slate-400 block">Telefon:</span>
+                      <span className="text-slate-200 block">{formData.phone}</span>
+                    </div>
+                  </div>
+
                   {attachedDishes.length > 0 && (
                     <div className="pt-2 border-t border-white/5">
                       <span className="text-slate-400 block mb-1.5">Angehängtes Tischbuffet:</span>
@@ -396,14 +477,43 @@ export default function Reservation({
                       </p>
                     </div>
                   )}
+
+                  <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-slate-400">
+                    <span>E-Mail-Benachrichtigung:</span>
+                    <span className="text-gold-400 font-mono font-medium">{RESTAURANT_RESERVATION_EMAIL}</span>
+                  </div>
                 </div>
 
-                <button
-                  onClick={resetForm}
-                  className="bg-transparent hover:bg-white/5 text-slate-300 hover:text-white border border-slate-700 px-6 py-2.5 rounded-lg text-xs uppercase tracking-wider transition-all cursor-pointer"
-                >
-                  Neue Reservierung vornehmen
-                </button>
+                {/* Actions */}
+                <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+                  {lastReservation && (
+                    <a
+                      href={generateMailtoLink({
+                        id: lastReservation.id,
+                        name: lastReservation.name,
+                        email: lastReservation.email,
+                        phone: lastReservation.phone,
+                        date: lastReservation.date,
+                        time: lastReservation.time,
+                        guests: lastReservation.guests,
+                        wishes: lastReservation.wishes,
+                        dishesSummary: attachedDishes.map(d => `${d.name} (${d.quantity}x)`).join(', ')
+                      })}
+                      className="bg-schlei-800 hover:bg-schlei-700 text-slate-200 hover:text-white border border-gold-500/30 px-5 py-2.5 rounded-xl text-xs font-medium flex items-center justify-center gap-2 transition cursor-pointer"
+                    >
+                      <Mail className="w-3.5 h-3.5 text-gold-400" />
+                      <span>Kopie in Mail-App öffnen</span>
+                    </a>
+                  )}
+
+                  <button
+                    onClick={resetForm}
+                    className="bg-transparent hover:bg-white/5 text-slate-300 hover:text-white border border-slate-700 px-5 py-2.5 rounded-xl text-xs uppercase tracking-wider transition cursor-pointer"
+                  >
+                    Neue Reservierung
+                  </button>
+                </div>
+
               </motion.div>
             )}
           </AnimatePresence>

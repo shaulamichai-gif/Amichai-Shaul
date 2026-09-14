@@ -1,8 +1,27 @@
 import { useState, useEffect } from 'react';
-import { Reservation, MenuItem } from '../types';
+import { Reservation } from '../types';
 import { MENU_ITEMS, INITIAL_RESERVATIONS } from '../data';
-import { Search, Shield, Check, X, Calendar, Users, ShoppingBag, Trash2, ShieldAlert } from 'lucide-react';
+import { 
+  Search, 
+  Shield, 
+  Trash2, 
+  ShieldAlert, 
+  Mail, 
+  Send, 
+  CheckCircle2, 
+  Clock, 
+  Calendar, 
+  Users, 
+  ShoppingBag,
+  Info
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { 
+  sendReservationEmail, 
+  sendTestEmail, 
+  generateMailtoLink, 
+  RESTAURANT_RESERVATION_EMAIL 
+} from '../services/emailService';
 
 interface AdminPanelProps {
   onRefreshTrigger: number;
@@ -12,6 +31,10 @@ export default function AdminPanel({ onRefreshTrigger }: AdminPanelProps) {
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'bestaetigt' | 'storniert'>('all');
+  const [testEmailLoading, setTestEmailLoading] = useState(false);
+  const [testEmailFeedback, setTestEmailFeedback] = useState<string | null>(null);
+  const [sendingEmailId, setSendingEmailId] = useState<string | null>(null);
+  const [sentNotice, setSentNotice] = useState<Record<string, string>>({});
 
   // Load reservations from localStorage
   const loadReservations = () => {
@@ -48,6 +71,57 @@ export default function AdminPanel({ onRefreshTrigger }: AdminPanelProps) {
     localStorage.setItem('schleieck_reservations', JSON.stringify(filtered));
   };
 
+  // Trigger test email to amichai@gmx.de
+  const handleTestEmail = async () => {
+    setTestEmailLoading(true);
+    setTestEmailFeedback(null);
+    const res = await sendTestEmail();
+    setTestEmailLoading(false);
+    setTestEmailFeedback(res.message);
+    setTimeout(() => {
+      setTestEmailFeedback(null);
+    }, 6000);
+  };
+
+  // Manually re-send reservation to amichai@gmx.de
+  const handleResendEmail = async (res: Reservation) => {
+    setSendingEmailId(res.id);
+    const summary = getDishesSummary(res.selectedDishes);
+    const dishesSummaryText = summary ? summary.map(s => `${s.name} (${s.quantity}x)`).join(', ') : undefined;
+
+    const result = await sendReservationEmail({
+      id: res.id,
+      name: res.name,
+      email: res.email,
+      phone: res.phone,
+      date: res.date,
+      time: res.time,
+      guests: res.guests,
+      wishes: res.wishes,
+      dishesSummary: dishesSummaryText
+    });
+
+    setSendingEmailId(null);
+    setSentNotice(prev => ({
+      ...prev,
+      [res.id]: result.success ? 'E-Mail gesendet an ' + RESTAURANT_RESERVATION_EMAIL : 'Fehler beim Senden'
+    }));
+
+    // Update reservation with email status
+    const updated = reservations.map(r => {
+      if (r.id === res.id) {
+        return {
+          ...r,
+          emailSentTo: RESTAURANT_RESERVATION_EMAIL,
+          emailStatus: result.success ? ('gesendet' as const) : ('fehler' as const)
+        };
+      }
+      return r;
+    });
+    setReservations(updated);
+    localStorage.setItem('schleieck_reservations', JSON.stringify(updated));
+  };
+
   // Filter lists
   const filteredReservations = reservations.filter(res => {
     const matchesSearch = res.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
@@ -81,7 +155,7 @@ export default function AdminPanel({ onRefreshTrigger }: AdminPanelProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header alert */}
-        <div className="bg-gold-500/10 border border-gold-500/30 rounded-2xl p-5 mb-10 flex flex-col sm:flex-row items-center sm:items-start justify-between gap-4">
+        <div className="bg-gold-500/10 border border-gold-500/30 rounded-2xl p-5 mb-10 flex flex-col lg:flex-row items-center lg:items-start justify-between gap-6">
           <div className="flex gap-3.5 items-start text-center sm:text-left">
             <div className="bg-gold-500/20 p-2.5 rounded-lg border border-gold-500/30 text-gold-400 shrink-0 mx-auto sm:mx-0">
               <Shield className="w-6 h-6" />
@@ -90,13 +164,49 @@ export default function AdminPanel({ onRefreshTrigger }: AdminPanelProps) {
               <h4 className="font-serif text-lg font-bold text-white flex items-center justify-center sm:justify-start gap-1.5">
                 Schleieck Reservierungs-Manager
               </h4>
-              <p className="text-xs text-slate-400 font-light mt-1 max-w-2xl leading-relaxed">
-                Willkommen im digitalen Buchungsbuch. Hier können Mitarbeiter eingehende Tischreservierungen einsehen, Tischbuffets auswerten, nach Gästen suchen und Statusmeldungen verwalten. Die Daten werden in Echtzeit lokal gespeichert.
+              <p className="text-xs text-slate-300 font-light mt-1 max-w-2xl leading-relaxed">
+                Eingehende Reservierungen von der Homepage werden automatisch per E-Mail an <strong className="text-gold-400 font-semibold">{RESTAURANT_RESERVATION_EMAIL}</strong> verschickt.
               </p>
+              
+              {/* Email config badge */}
+              <div className="mt-3 flex flex-wrap items-center gap-3">
+                <div className="inline-flex items-center gap-2 bg-schlei-900/80 border border-gold-500/30 px-3 py-1.5 rounded-lg text-xs">
+                  <Mail className="w-3.5 h-3.5 text-gold-400" />
+                  <span className="text-slate-400">E-Mail-Ziel:</span>
+                  <strong className="text-white font-mono">{RESTAURANT_RESERVATION_EMAIL}</strong>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleTestEmail}
+                  disabled={testEmailLoading}
+                  className="inline-flex items-center gap-1.5 bg-gold-500/20 hover:bg-gold-500/30 text-gold-300 border border-gold-500/40 px-3 py-1.5 rounded-lg text-xs font-medium transition cursor-pointer disabled:opacity-50"
+                >
+                  {testEmailLoading ? (
+                    <>
+                      <div className="w-3 h-3 border-2 border-gold-400 border-t-transparent rounded-full animate-spin"></div>
+                      <span>Sende Test-Mail...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-3.5 h-3.5" />
+                      <span>Test-Mail an {RESTAURANT_RESERVATION_EMAIL} senden</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {testEmailFeedback && (
+                <div className="mt-2.5 text-xs text-emerald-400 flex items-center gap-1.5 font-medium">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <span>{testEmailFeedback}</span>
+                </div>
+              )}
             </div>
           </div>
-          <div className="text-center sm:text-right">
-            <span className="text-[10px] text-slate-500 uppercase tracking-widest block font-medium">Besaß-Kapazität</span>
+
+          <div className="text-center lg:text-right shrink-0">
+            <span className="text-[10px] text-slate-400 uppercase tracking-widest block font-medium">Besatz-Kapazität</span>
             <span className="font-serif text-2xl font-bold text-gold-400 block mt-1">
               {totalCovers} Personen
             </span>
@@ -204,6 +314,11 @@ export default function AdminPanel({ onRefreshTrigger }: AdminPanelProps) {
                           }`}>
                             {isBestaetigt ? 'Bestätigt' : 'Storniert'}
                           </span>
+
+                          <span className="text-[10px] font-medium bg-schlei-900 border border-white/10 px-2.5 py-0.5 rounded-full text-slate-400 flex items-center gap-1">
+                            <Mail className="w-3 h-3 text-gold-400" />
+                            <span>E-Mail: {RESTAURANT_RESERVATION_EMAIL}</span>
+                          </span>
                         </div>
 
                         {/* Guest specs: date, phone, wishes, email */}
@@ -252,6 +367,13 @@ export default function AdminPanel({ onRefreshTrigger }: AdminPanelProps) {
                             </p>
                           </div>
                         )}
+
+                        {sentNotice[res.id] && (
+                          <div className="text-xs text-emerald-400 flex items-center gap-1.5 font-medium bg-emerald-500/10 p-2 rounded-lg border border-emerald-500/20">
+                            <CheckCircle2 className="w-4 h-4" />
+                            <span>{sentNotice[res.id]}</span>
+                          </div>
+                        )}
                       </div>
 
                       {/* Attached Table Buffet detail / Actions */}
@@ -286,26 +408,48 @@ export default function AdminPanel({ onRefreshTrigger }: AdminPanelProps) {
                         </div>
 
                         {/* Action buttons */}
-                        <div className="flex gap-2.5 pt-4 border-t border-white/5 mt-4 justify-end">
+                        <div className="flex flex-wrap gap-2 pt-4 border-t border-white/5 mt-4 justify-end">
+                          
+                          {/* Resend email to amichai@gmx.de */}
+                          <button
+                            type="button"
+                            onClick={() => handleResendEmail(res)}
+                            disabled={sendingEmailId === res.id}
+                            className="bg-gold-500/15 hover:bg-gold-500/25 text-gold-300 text-xs px-3 py-2 rounded-xl border border-gold-500/30 flex items-center gap-1.5 transition cursor-pointer disabled:opacity-50"
+                            title={`Reservierungsdaten erneut an ${RESTAURANT_RESERVATION_EMAIL} senden`}
+                          >
+                            {sendingEmailId === res.id ? (
+                              <>
+                                <div className="w-3 h-3 border-2 border-gold-400 border-t-transparent rounded-full animate-spin"></div>
+                                <span>Sendet...</span>
+                              </>
+                            ) : (
+                              <>
+                                <Mail className="w-3.5 h-3.5" />
+                                <span>Mail senden</span>
+                              </>
+                            )}
+                          </button>
+
                           <button 
                             onClick={() => deleteReservation(res.id)}
-                            className="bg-red-500/10 hover:bg-red-600 text-red-400 hover:text-white p-2.5 rounded-xl border border-red-500/20 hover:border-red-600 transition duration-300 cursor-pointer"
+                            className="bg-red-500/10 hover:bg-red-600 text-red-400 hover:text-white p-2 rounded-xl border border-red-500/20 hover:border-red-600 transition duration-300 cursor-pointer"
                             title="Buchung endgültig löschen"
                           >
-                            <Trash2 className="w-4.5 h-4.5" />
+                            <Trash2 className="w-4 h-4" />
                           </button>
 
                           {isBestaetigt ? (
                             <button
                               onClick={() => updateStatus(res.id, 'storniert')}
-                              className="bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 text-xs px-4 py-2.5 rounded-xl border border-amber-500/20 transition cursor-pointer"
+                              className="bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 text-xs px-3 py-2 rounded-xl border border-amber-500/20 transition cursor-pointer"
                             >
                               Stornieren
                             </button>
                           ) : (
                             <button
                               onClick={() => updateStatus(res.id, 'bestaetigt')}
-                              className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-4 py-2.5 rounded-xl font-bold transition cursor-pointer"
+                              className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-3 py-2 rounded-xl font-bold transition cursor-pointer"
                             >
                               Bestätigen
                             </button>
