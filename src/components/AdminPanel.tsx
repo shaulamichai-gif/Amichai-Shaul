@@ -13,12 +13,14 @@ import {
   Calendar, 
   Users, 
   ShoppingBag,
-  Info
+  Info,
+  AlertTriangle
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   sendReservationEmail, 
   sendTestEmail, 
+  checkActivationStatus,
   generateMailtoLink, 
   RESTAURANT_RESERVATION_EMAIL 
 } from '../services/emailService';
@@ -35,6 +37,29 @@ export default function AdminPanel({ onRefreshTrigger }: AdminPanelProps) {
   const [testEmailFeedback, setTestEmailFeedback] = useState<string | null>(null);
   const [sendingEmailId, setSendingEmailId] = useState<string | null>(null);
   const [sentNotice, setSentNotice] = useState<Record<string, string>>({});
+  const [activationStatus, setActivationStatus] = useState<{
+    checked: boolean;
+    isActivated: boolean;
+    checking: boolean;
+    message: string;
+  }>({
+    checked: false,
+    isActivated: false,
+    checking: false,
+    message: ''
+  });
+
+  // Check FormSubmit activation status
+  const runActivationCheck = async () => {
+    setActivationStatus(prev => ({ ...prev, checking: true }));
+    const res = await checkActivationStatus();
+    setActivationStatus({
+      checked: true,
+      isActivated: res.isActivated,
+      checking: false,
+      message: res.message
+    });
+  };
 
   // Load reservations from localStorage
   const loadReservations = () => {
@@ -50,6 +75,7 @@ export default function AdminPanel({ onRefreshTrigger }: AdminPanelProps) {
 
   useEffect(() => {
     loadReservations();
+    runActivationCheck();
   }, [onRefreshTrigger]);
 
   // Update reservation status in localStorage
@@ -200,6 +226,51 @@ export default function AdminPanel({ onRefreshTrigger }: AdminPanelProps) {
                 <div className="mt-2.5 text-xs text-emerald-400 flex items-center gap-1.5 font-medium">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                   <span>{testEmailFeedback}</span>
+                </div>
+              )}
+
+              {/* Activation status alert banner */}
+              {activationStatus.checked && !activationStatus.isActivated && (
+                <div className="mt-4 p-4 rounded-xl bg-amber-500/15 border-2 border-amber-500/40 text-left text-xs">
+                  <div className="flex items-start gap-2.5">
+                    <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                    <div className="space-y-2">
+                      <div className="font-bold text-amber-300">
+                        E-Mail-Aktivierung noch ausstehend!
+                      </div>
+                      <p className="text-slate-200 text-[11px] leading-relaxed font-light">
+                        FormSubmit hat eine Aktivierungs-E-Mail an <strong className="text-gold-400">{RESTAURANT_RESERVATION_EMAIL}</strong> verschickt. Solange dieser Link nicht im GMX-Postfach angeklickt wird, darf der Dienst keine Reservierungen weiterleiten.
+                      </p>
+                      <div className="bg-schlei-900/80 p-2.5 rounded-lg border border-amber-500/20 text-[11px] text-slate-300">
+                        <strong>Wichtig:</strong> Schauen Sie in <strong>{RESTAURANT_RESERVATION_EMAIL}</strong> unbedingt in den Ordner <strong className="text-white">„Spamverdacht“ / „Spam“</strong> und klicken Sie dort auf <strong className="text-emerald-400">„Activate Form“</strong>.
+                      </div>
+                      <div className="flex flex-wrap gap-2 pt-1">
+                        <a
+                          href="https://www.gmx.net"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-amber-500 hover:bg-amber-400 text-schlei-900 font-bold px-3 py-1.5 rounded-lg text-xs transition"
+                        >
+                          GMX Postfach öffnen (gmx.net)
+                        </a>
+                        <button
+                          type="button"
+                          onClick={runActivationCheck}
+                          disabled={activationStatus.checking}
+                          className="bg-schlei-900 hover:bg-schlei-700 text-slate-200 border border-white/20 px-3 py-1.5 rounded-lg text-xs transition cursor-pointer"
+                        >
+                          {activationStatus.checking ? 'Prüfe...' : 'Status jetzt erneut prüfen'}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activationStatus.checked && activationStatus.isActivated && (
+                <div className="mt-3 inline-flex items-center gap-2 bg-emerald-500/15 border border-emerald-500/30 px-3 py-1.5 rounded-lg text-xs text-emerald-300 font-medium">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <span>E-Mail-Empfang aktiv & freigeschaltet für {RESTAURANT_RESERVATION_EMAIL}</span>
                 </div>
               )}
             </div>

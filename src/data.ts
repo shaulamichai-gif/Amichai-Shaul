@@ -87,15 +87,15 @@ export const MENU_ITEMS: MenuItem[] = [
     imageUrl: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80'
   },
   {
-    id: 'ribeye_spiess',
-    name: 'Ribeye-Spieß',
-    description: 'SH-Färse / Sauerrahm / Kartoffeln / Chilibohne',
-    price: 14.90,
+    id: 'dry_aged_burger_patty',
+    name: 'Dry-Aged Burger-Patty',
+    description: 'Knackiger Salat • pikante Chili-Aioli • Tortilla • Röstzwiebeln',
+    price: 13.90,
     category: 'sharing',
-    cuisine: 'ostsee',
-    ingredients: ['Schleswig-Holstein Färse Rind', 'Sauerrahm', 'Kartoffeln', 'Chilibohne'],
-    imageUrl: 'https://lh3.googleusercontent.com/d/1rPq3kpkGMFxEGiX3ORn2Ey4x6RrlrqA7',
-    accentNote: 'Regional-Herzhaft'
+    cuisine: 'mittelmeer',
+    ingredients: ['Dry-Aged Rindfleisch', 'Chili-Aioli', 'Salat', 'Tortilla', 'Röstzwiebeln'],
+    imageUrl: 'https://lh3.googleusercontent.com/d/1IZMWGmhACFPWGC1OHzq5OEdJti_uTBHT',
+    accentNote: 'Knusprig & Saftig'
   },
   {
     id: 'crispyhuhn',
@@ -227,7 +227,7 @@ export const INITIAL_RESERVATIONS = [
     createdAt: '2026-08-30T14:30:00Z',
     selectedDishes: [
       { menuItemId: 'spitzkohl_ofen', quantity: 2 },
-      { menuItemId: 'ribeye_spiess', quantity: 2 },
+      { menuItemId: 'dry_aged_burger_patty', quantity: 2 },
       { menuItemId: 'riesengarnele', quantity: 1 },
       { menuItemId: 'thunfisch_tartar', quantity: 1 }
     ]

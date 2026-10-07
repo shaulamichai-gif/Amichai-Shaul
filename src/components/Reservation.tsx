@@ -389,28 +389,92 @@ export default function Reservation({
                   Wir freuen uns sehr auf Ihren Besuch im Restaurant Am Schleieck.
                 </p>
 
-                {/* Email dispatch confirmation badge */}
-                <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-4 max-w-md mx-auto mb-6 text-left flex items-start gap-3.5">
-                  <div className="p-2 bg-emerald-500/20 text-emerald-400 rounded-xl shrink-0 mt-0.5 border border-emerald-500/30">
-                    <MailCheck className="w-5 h-5" />
-                  </div>
-                  <div className="text-xs">
-                    <div className="font-bold text-emerald-300 flex items-center gap-1.5">
-                      <span>E-Mail erfolgreich versendet</span>
-                    </div>
-                    <p className="text-slate-300 mt-1 font-light leading-relaxed">
-                      Die Daten dieser Reservierung wurden soeben an die E-Mail-Adresse <strong className="text-gold-400 font-semibold">{RESTAURANT_RESERVATION_EMAIL}</strong> übermittelt.
-                    </p>
-                    {emailResult?.needsActivation && (
-                      <div className="mt-2.5 pt-2.5 border-t border-emerald-500/20 text-[11px] text-amber-300 flex items-start gap-1.5">
-                        <Info className="w-3.5 h-3.5 shrink-0 mt-0.5 text-amber-400" />
-                        <span>
-                          Hinweis für den Betreiber: FormSubmit hat eine einmalige Bestätigungs-E-Mail an <strong>{RESTAURANT_RESERVATION_EMAIL}</strong> gesendet. Bitte dort einmalig den Link anklicken, um das Postfach freizuschalten.
-                        </span>
+                {/* Email dispatch confirmation badge or activation warning */}
+                {emailResult?.needsActivation ? (
+                  <div className="bg-amber-500/10 border-2 border-amber-500/40 rounded-2xl p-5 max-w-lg mx-auto mb-6 text-left shadow-xl">
+                    <div className="flex items-start gap-3.5">
+                      <div className="p-2.5 bg-amber-500/20 text-amber-400 rounded-xl shrink-0 mt-0.5 border border-amber-500/40">
+                        <AlertCircle className="w-5 h-5" />
                       </div>
-                    )}
+                      <div className="text-xs">
+                        <h5 className="font-bold text-amber-300 text-sm mb-1">
+                          Einmalige Freischaltung für {RESTAURANT_RESERVATION_EMAIL} erforderlich!
+                        </h5>
+                        <p className="text-slate-200 font-light leading-relaxed">
+                          Der E-Mail-Dienst hat soeben eine Bestätigungs-E-Mail an <strong>{RESTAURANT_RESERVATION_EMAIL}</strong> verschickt. Solange dieser Link nicht geklickt wird, darf der Dienst keine Reservierungen weiterleiten.
+                        </p>
+
+                        <div className="bg-[#07181e] p-3.5 rounded-xl border border-amber-500/20 mt-3 text-slate-300 space-y-1.5 text-[11px]">
+                          <strong className="text-amber-300 block font-semibold">So schalten Sie den Empfang jetzt frei:</strong>
+                          <ol className="list-decimal list-inside space-y-1 text-slate-300">
+                            <li>Öffnen Sie Ihr GMX-Postfach (<strong className="text-white">{RESTAURANT_RESERVATION_EMAIL}</strong>).</li>
+                            <li>Prüfen Sie unbedingt den Ordner <strong className="text-amber-200">„Spam“ bzw. „Spamverdacht“</strong>!</li>
+                            <li>Öffnen Sie die E-Mail von <em>FormSubmit</em> und klicken Sie auf <strong className="text-emerald-400">„Activate Form“</strong>.</li>
+                          </ol>
+                        </div>
+
+                        <div className="mt-4 flex flex-wrap gap-2.5">
+                          <a
+                            href="https://www.gmx.net"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-schlei-900 font-bold px-4 py-2 rounded-xl text-xs transition"
+                          >
+                            <span>GMX-Postfach öffnen (gmx.net)</span>
+                          </a>
+
+                          {lastReservation && (
+                            <a
+                              href={generateMailtoLink({
+                                id: lastReservation.id,
+                                name: lastReservation.name,
+                                email: lastReservation.email,
+                                phone: lastReservation.phone,
+                                date: lastReservation.date,
+                                time: lastReservation.time,
+                                guests: lastReservation.guests,
+                                wishes: lastReservation.wishes,
+                                dishesSummary: attachedDishes.map(d => `${d.name} (${d.quantity}x)`).join(', ')
+                              })}
+                              className="inline-flex items-center gap-1.5 bg-schlei-800 hover:bg-schlei-700 text-slate-200 border border-gold-500/30 px-4 py-2 rounded-xl text-xs transition"
+                            >
+                              <Mail className="w-3.5 h-3.5 text-gold-400" />
+                              <span>Jetzt per Mail-App an {RESTAURANT_RESERVATION_EMAIL} senden</span>
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ) : emailResult?.success ? (
+                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-4 max-w-md mx-auto mb-6 text-left flex items-start gap-3.5">
+                    <div className="p-2 bg-emerald-500/20 text-emerald-400 rounded-xl shrink-0 mt-0.5 border border-emerald-500/30">
+                      <MailCheck className="w-5 h-5" />
+                    </div>
+                    <div className="text-xs">
+                      <div className="font-bold text-emerald-300 flex items-center gap-1.5">
+                        <span>E-Mail erfolgreich versendet</span>
+                      </div>
+                      <p className="text-slate-300 mt-1 font-light leading-relaxed">
+                        Die Daten dieser Reservierung wurden direkt an <strong className="text-gold-400 font-semibold">{RESTAURANT_RESERVATION_EMAIL}</strong> zugestellt.
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4 max-w-md mx-auto mb-6 text-left flex items-start gap-3.5">
+                    <div className="p-2 bg-amber-500/20 text-amber-400 rounded-xl shrink-0 mt-0.5 border border-amber-500/30">
+                      <Info className="w-5 h-5" />
+                    </div>
+                    <div className="text-xs">
+                      <div className="font-bold text-amber-300">
+                        Hinweis zur E-Mail-Übermittlung
+                      </div>
+                      <p className="text-slate-300 mt-1 font-light leading-relaxed">
+                        Die Buchung wurde im System hinterlegt. Sie können die Daten auch direkt mit Ihrem E-Mail-Programm an <strong className="text-gold-400">{RESTAURANT_RESERVATION_EMAIL}</strong> senden.
+                      </p>
+                    </div>
+                  </div>
+                )}
 
                 {/* Booking details summarizing slip */}
                 <div className="bg-[#07181e]/80 border border-white/5 rounded-2xl p-6 text-left max-w-md mx-auto mb-8 text-xs space-y-3.5 shadow-inner">

@@ -62,19 +62,20 @@ export async function sendReservationEmail(
     const isActivation = Boolean(
       data?.message && typeof data.message === 'string' && data.message.toLowerCase().includes('activation')
     );
-    const isSuccess = data?.success === 'true' || data?.success === true;
+    const isSuccess = (data?.success === 'true' || data?.success === true) && !isActivation;
 
     return {
-      success: isSuccess || isActivation,
+      success: isSuccess,
       needsActivation: isActivation,
       message: isActivation
-        ? 'Aktivierungs-E-Mail wurde an amichai@gmx.de versendet. Bitte einmalig bestätigen.'
-        : 'E-Mail wurde erfolgreich an amichai@gmx.de übermittelt.'
+        ? 'FormSubmit wartet auf einmalige Freischaltung: Bitte in amichai@gmx.de (im Spamverdacht/Spam-Ordner) auf "Activate Form" klicken!'
+        : (isSuccess ? 'E-Mail wurde erfolgreich an amichai@gmx.de übermittelt.' : (data?.message || 'Fehler beim Versand'))
     };
   } catch (error) {
     console.warn('E-Mail-Versand an ' + RESTAURANT_RESERVATION_EMAIL + ' nicht abgeschlossen:', error);
     return {
       success: false,
+      needsActivation: false,
       message: error instanceof Error ? error.message : 'Netzwerkfehler beim E-Mail-Versand'
     };
   }
@@ -108,19 +109,65 @@ export async function sendTestEmail(): Promise<EmailSendResult> {
     const isActivation = Boolean(
       data?.message && typeof data.message === 'string' && data.message.toLowerCase().includes('activation')
     );
-    const isSuccess = data?.success === 'true' || data?.success === true;
+    const isSuccess = (data?.success === 'true' || data?.success === true) && !isActivation;
 
     return {
-      success: isSuccess || isActivation,
+      success: isSuccess,
       needsActivation: isActivation,
       message: isActivation
-        ? 'Aktivierungs-E-Mail wurde an amichai@gmx.de gesendet. Bitte dort einmalig freischalten!'
-        : 'Test-E-Mail erfolgreich an amichai@gmx.de gesendet!'
+        ? '⚠️ Noch nicht aktiviert! Bitte in amichai@gmx.de (Spam-Ordner) die Aktivierungs-Mail von FormSubmit bestätigen.'
+        : '✅ Test-E-Mail erfolgreich an amichai@gmx.de gesendet!'
     };
   } catch (error) {
     return {
       success: false,
+      needsActivation: false,
       message: error instanceof Error ? error.message : 'Netzwerkfehler'
+    };
+  }
+}
+
+/**
+ * Probes FormSubmit to check whether amichai@gmx.de is currently activated
+ */
+export async function checkActivationStatus(): Promise<{
+  isActivated: boolean;
+  needsActivation: boolean;
+  message: string;
+}> {
+  try {
+    const response = await fetch(`https://formsubmit.co/ajax/${RESTAURANT_RESERVATION_EMAIL}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        _subject: 'Status Probe',
+        statusCheck: true,
+        email: 'check@schleieck.de',
+        name: 'Probe'
+      })
+    });
+
+    const data = await response.json();
+    const isActivation = Boolean(
+      data?.message && typeof data.message === 'string' && data.message.toLowerCase().includes('activation')
+    );
+    const isSuccess = (data?.success === 'true' || data?.success === true) && !isActivation;
+
+    return {
+      isActivated: isSuccess,
+      needsActivation: isActivation,
+      message: isActivation
+        ? 'Aktivierung ausstehend: FormSubmit wartet auf Bestätigung in amichai@gmx.de'
+        : (isSuccess ? 'Vollständig aktiv und empfangsbereit' : (data?.message || 'Unbekannt'))
+    };
+  } catch (error) {
+    return {
+      isActivated: false,
+      needsActivation: false,
+      message: 'Verbindungsfehler beim Status-Check'
     };
   }
 }
