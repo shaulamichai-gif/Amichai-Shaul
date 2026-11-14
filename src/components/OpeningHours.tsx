@@ -83,7 +83,7 @@ export default function OpeningHours() {
                     <MapPin className="w-4 h-4 text-gold-400 shrink-0 mt-0.5" />
                     <div>
                       <span className="text-slate-400 block font-medium">Adresse:</span>
-                      <strong className="text-white block mt-0.5">Schleieck 1, 24376 Maasholm an der Schlei</strong>
+                      <strong className="text-white block mt-0.5">Schmiedestraße 140, 24404 Maasholm an der Schlei</strong>
                     </div>
                   </div>
 

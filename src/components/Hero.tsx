@@ -6,14 +6,14 @@ export default function Hero() {
   const featuredDishes = [
     {
       name: 'Würziges Crispyhuhn',
-      price: '13,50 €',
+      price: '14,50 €',
       description: 'Nam Pla* / Mango / Limette / Rote Chili / Sesam',
       imageUrl: '/assets/IMG_1795.PNG',
       fallbackUrl: '/assets/crispy_huhn.jpg'
     },
     {
       name: 'Gerösteter Fetakäse',
-      price: '13,50 €',
+      price: '14,50 €',
       description: 'Filoteig / Harissa* / Kirschtomate / Blattspinat / Olive / Zitrone',
       imageUrl: 'https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=600&q=80',
       fallbackUrl: 'https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=600&q=80'

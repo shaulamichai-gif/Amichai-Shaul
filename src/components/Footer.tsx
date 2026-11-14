@@ -98,8 +98,8 @@ export default function Footer({ onAdminToggle, isAdminVisible }: FooterProps) {
                     <p><strong>Angaben gemäß § 5 TMG:</strong></p>
                     <p>
                       Restaurant Am Schleieck<br />
-                      Schleieck 1<br />
-                      24376 Maasholm
+                      Schmiedestraße 140<br />
+                      24404 Maasholm
                     </p>
                     <p>
                       <strong>Vertreten durch:</strong><br />
@@ -108,7 +108,7 @@ export default function Footer({ onAdminToggle, isAdminVisible }: FooterProps) {
                     <p>
                       <strong>Kontakt:</strong><br />
                       Telefon: 04642-6016<br />
-                      E-Mail: info@am-schleieck-maasholm.de
+                      E-Mail: schleieck@t-online.de
                     </p>
                     <p>
                       <strong>Aufsichtsbehörde:</strong><br />

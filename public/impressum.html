@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | Restaurant Am Schleieck | Maasholm</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        schlei: {
+                            50: '#f0f7f9',
+                            100: '#e0eff3',
+                            700: '#1b4d5a',
+                            800: '#0f2931',
+                            900: '#07181e',
+                        },
+                        gold: {
+                            400: '#e5c158',
+                            500: '#d4af37',
+                            600: '#b89225',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .blur-card {
+            background: rgba(15, 41, 49, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.18);
+        }
+    </style>
+</head>
+<body class="bg-schlei-900 text-slate-100 font-sans selection:bg-gold-500 selection:text-schlei-900 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 bg-schlei-900/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="group block leading-tight">
+                    <span class="font-serif text-xl sm:text-2xl font-bold tracking-wider text-white block">AM SCHLEIECK</span>
+                    <span class="text-[9px] tracking-widest text-gold-400 uppercase font-light block whitespace-nowrap">Maasholm • Fusion Kitchen</span>
+                </a>
+
+                <a href="index.html" class="inline-flex items-center gap-2 bg-schlei-800 hover:bg-schlei-700 text-gold-400 border border-gold-500/40 text-xs uppercase tracking-wider font-bold px-4 py-2.5 rounded-lg transition">
+                    <i class="fa-solid fa-arrow-left"></i> Zurück zur Startseite
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3 block">Rechtliche Hinweise</span>
+                <h1 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-4">Impressum</h1>
+                <div class="w-16 h-0.5 bg-gold-500 mx-auto"></div>
+            </div>
+
+            <div class="blur-card rounded-3xl p-8 sm:p-12 border border-gold-500/30 shadow-2xl space-y-8 text-sm sm:text-base text-slate-200 leading-relaxed">
+
+                <!-- § 5 DDG -->
+                <section class="space-y-2">
+                    <h2 class="font-serif text-2xl font-bold text-gold-400">Angaben gemäß § 5 DDG</h2>
+                    <p>
+                        <strong>Restaurant Am Schleieck</strong><br>
+                        Inhaber: Amichai Shaul<br>
+                        Schmiedestraße 140<br>
+                        24404 Maasholm<br>
+                        Deutschland
+                    </p>
+                </section>
+
+                <!-- Kontakt -->
+                <section class="border-t border-white/10 pt-6 space-y-2">
+                    <h2 class="font-serif text-2xl font-bold text-gold-400">Kontakt</h2>
+                    <p>
+                        Telefon: <a href="tel:046426016" class="text-gold-400 hover:underline">04642 - 6016</a><br>
+                        E-Mail: <a href="mailto:schleieck@t-online.de" class="text-gold-400 hover:underline">schleieck@t-online.de</a>
+                    </p>
+                </section>
+
+                <!-- Umsatzsteuer-ID -->
+                <section class="border-t border-white/10 pt-6 space-y-2">
+                    <h2 class="font-serif text-2xl font-bold text-gold-400">Umsatzsteuer-ID</h2>
+                    <p>
+                        Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+                        <span class="text-slate-400 italic">[Bitte Ihre USt-IdNr. oder Steuernummer ergänzen, falls vorhanden]</span>
+                    </p>
+                </section>
+
+                <!-- Aufsichtsbehörde & Kammer -->
+                <section class="border-t border-white/10 pt-6 space-y-2">
+                    <h2 class="font-serif text-2xl font-bold text-gold-400">Aufsichtsbehörde &amp; Gewerbe</h2>
+                    <p>
+                        <strong>Zuständige Aufsichtsbehörde:</strong><br>
+                        Amt Geltinger Bucht – Ordnungs- und Gewerbeamt<br>
+                        Holmlück 2, 24972 Steinbergkirche
+                    </p>
+                    <p class="pt-2">
+                        <strong>Zuständige Kammer:</strong><br>
+                        Industrie- und Handelskammer zu Flensburg (IHK Flensburg)<br>
+                        Heinrichstraße 28–34, 24937 Flensburg
+                    </p>
+                </section>
+
+                <!-- Redaktionell Verantwortlicher -->
+                <section class="border-t border-white/10 pt-6 space-y-2">
+                    <h2 class="font-serif text-2xl font-bold text-gold-400">Redaktionell verantwortlich gemäß § 18 Abs. 2 MStV</h2>
+                    <p>
+                        Amichai Shaul<br>
+                        Schmiedestraße 140<br>
+                        24404 Maasholm
+                    </p>
+                </section>
+
+                <!-- Verbraucherstreitbeilegung -->
+                <section class="border-t border-white/10 pt-6 space-y-2">
+                    <h2 class="font-serif text-2xl font-bold text-gold-400">Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
+                    <p class="text-slate-300 text-sm">
+                        Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen (§ 36 VSBG).
+                    </p>
+                </section>
+
+                <!-- Haftungsausschluss -->
+                <section class="border-t border-white/10 pt-6 space-y-4">
+                    <h2 class="font-serif text-2xl font-bold text-gold-400">Haftungsausschluss</h2>
+
+                    <div>
+                        <h3 class="font-bold text-white mb-1">Haftung für Inhalte</h3>
+                        <p class="text-slate-300 text-sm">
+                            Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-white mb-1">Haftung für Links</h3>
+                        <p class="text-slate-300 text-sm">
+                            Unser Angebot enthält ggf. Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-white mb-1">Urheberrecht</h3>
+                        <p class="text-slate-300 text-sm">
+                            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
+                        </p>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-schlei-900 border-t border-white/10 py-10 text-slate-400 text-xs mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center items-center">
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="index.html#speisekarte" class="hover:text-gold-400 transition">Speisekarte</a>
+                <a href="index.html#oeffnungszeiten" class="hover:text-gold-400 transition">Öffnungszeiten</a>
+                <a href="index.html#reservierung" class="hover:text-gold-400 transition">Reservieren</a>
+                <a href="impressum.html" class="text-gold-400 font-semibold transition">Impressum</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
