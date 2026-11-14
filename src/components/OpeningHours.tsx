@@ -35,7 +35,7 @@ export default function OpeningHours() {
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="font-serif text-lg font-bold text-white">Dienstag, Donnerstag, Freitag & Samstag</h4>
+                    <h4 className="font-serif text-lg font-bold text-white">Montag, Dienstag, Freitag & Samstag</h4>
                     <p className="text-gold-400 font-semibold text-sm mt-0.5">17:00 – 22:00 Uhr</p>
                     <p className="text-xs text-slate-400 mt-1 font-light">
                       Unsere warme Küche bereitet die Speisen frisch von <strong>17:00 – 20:30 Uhr</strong> für Sie zu.
@@ -63,7 +63,7 @@ export default function OpeningHours() {
                   <div>
                     <h4 className="font-serif text-base font-bold text-slate-400">Ruhetage</h4>
                     <p className="text-slate-400 text-xs font-light mt-0.5">
-                      Montag und Mittwoch laden wir unsere Batterien auf.
+                      Mittwoch und Donnerstag laden wir unsere Batterien auf.
                     </p>
                   </div>
                 </div>
