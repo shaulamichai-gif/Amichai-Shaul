@@ -130,7 +130,7 @@ export const MENU_ITEMS: MenuItem[] = [
     cuisine: 'mittelmeer',
     isVegetarian: true,
     ingredients: ['Fetakäse', 'Filoteig', 'Harissa (Gewürzpaste)', 'Kirschtomate', 'Blattspinat', 'Olive', 'Zitrone'],
-    imageUrl: 'https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=600&q=80'
+    imageUrl: '/assets/aistudio/IMG_1796_2f552638.PNG'
   },
   {
     id: 'falafelteller',

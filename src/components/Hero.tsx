@@ -15,7 +15,7 @@ export default function Hero() {
       name: 'Gerösteter Fetakäse',
       price: '14,50 €',
       description: 'Filoteig / Harissa* / Kirschtomate / Blattspinat / Olive / Zitrone',
-      imageUrl: 'https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=600&q=80',
+      imageUrl: '/assets/aistudio/IMG_1796_2f552638.PNG',
       fallbackUrl: 'https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=600&q=80'
     },
     {
@@ -112,7 +112,7 @@ export default function Hero() {
                     }}
                     referrerPolicy="no-referrer"
                     alt={dish.name} 
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                    className={`w-full h-full object-cover object-center transition-transform duration-700 ${dish.name === 'Gerösteter Fetakäse' ? 'scale-[1.38] group-hover:scale-[1.45]' : 'group-hover:scale-105'}`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-schlei-900/90 via-transparent to-transparent opacity-60"></div>
                 </div>
