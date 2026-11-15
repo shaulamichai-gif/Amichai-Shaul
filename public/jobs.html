@@ -78,7 +78,22 @@
                             </div>
                         </div>
                     </div>
-                    <a href="index.html#ueber-uns" class="text-slate-200 hover:text-gold-400 transition">Über uns</a>
+                    <div class="relative group">
+                        <a href="index.html#ueber-uns" class="inline-flex items-center gap-1.5 text-slate-200 hover:text-gold-400 transition py-2">
+                            <span>Über uns</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] opacity-75 transition-transform duration-200 group-hover:rotate-180"></i>
+                        </a>
+                        <div class="absolute left-0 top-full pt-1 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="bg-schlei-800/95 backdrop-blur-md border border-gold-500/30 rounded-xl shadow-2xl py-2 overflow-hidden">
+                                <a href="index.html#ueber-uns" class="block px-4 py-2.5 text-xs text-slate-200 hover:bg-schlei-700/70 hover:text-gold-400 transition">
+                                    <i class="fa-solid fa-heart mr-2 text-gold-400/80"></i> Über uns
+                                </a>
+                                <a href="kuechenphilosophie.html" class="block px-4 py-2.5 text-xs text-gold-400 font-semibold hover:bg-schlei-700/70 hover:text-gold-300 transition border-t border-white/5">
+                                    <i class="fa-solid fa-seedling mr-2 text-gold-400"></i> Küchenphilosophie
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <a href="index.html#ab-8-personen" class="text-slate-200 hover:text-gold-400 transition">Ab 8 Personen</a>
                     <a href="index.html#oeffnungszeiten" class="text-slate-200 hover:text-gold-400 transition">Öffnungszeiten</a>
                     <a href="index.html#impressionen" class="text-slate-200 hover:text-gold-400 transition">Impressionen</a>
@@ -101,6 +116,7 @@
             <a href="index.html#speisekarte" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Speisekarte</a>
             <a href="index.html#specials" onclick="toggleMobileMenu()" class="block py-1.5 text-sm text-gold-400 hover:text-gold-300">↳ Specials</a>
             <a href="index.html#ueber-uns" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Über uns</a>
+            <a href="kuechenphilosophie.html" onclick="toggleMobileMenu()" class="block py-1.5 text-sm text-gold-400 hover:text-gold-300">↳ Küchenphilosophie</a>
             <a href="index.html#ab-8-personen" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Ab 8 Personen</a>
             <a href="index.html#oeffnungszeiten" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Öffnungszeiten</a>
             <a href="index.html#impressionen" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Impressionen</a>
@@ -147,6 +163,19 @@
                         <h3 class="font-serif text-2xl font-bold text-white mb-2">Servicemitarbeiter <span class="text-sm font-sans font-normal text-slate-400">(m/w/d)</span></h3>
                         <p class="text-slate-300 text-sm leading-relaxed">
                             Du bist ein herzlicher Gastgeber, hast ein Lächeln für unsere Gäste und sorgst gemeinsam mit uns für einen rundum schönen Abend.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Ausbildung in der Küche -->
+                <div class="bg-schlei-900/70 rounded-2xl p-6 sm:p-7 border border-gold-500/25 flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
+                    <div class="w-12 h-12 rounded-xl bg-gold-500/15 border border-gold-500/30 text-gold-400 flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-serif text-2xl font-bold text-white mb-1">Ausbildung in unserer Küche</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Wir bilden auch in unserer Küche aus und freuen uns darauf, unser Wissen an junge Leute weiterzugeben.
                         </p>
                     </div>
                 </div>

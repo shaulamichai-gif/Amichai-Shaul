@@ -99,7 +99,22 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#ueber-uns" class="text-slate-200 hover:text-gold-400 transition">Über uns</a>
+                    <div class="relative group">
+                        <a href="#ueber-uns" class="inline-flex items-center gap-1.5 text-slate-200 hover:text-gold-400 transition py-2">
+                            <span>Über uns</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] opacity-75 transition-transform duration-200 group-hover:rotate-180"></i>
+                        </a>
+                        <div class="absolute left-0 top-full pt-1 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="bg-schlei-800/95 backdrop-blur-md border border-gold-500/30 rounded-xl shadow-2xl py-2 overflow-hidden">
+                                <a href="#ueber-uns" class="block px-4 py-2.5 text-xs text-slate-200 hover:bg-schlei-700/70 hover:text-gold-400 transition">
+                                    <i class="fa-solid fa-heart mr-2 text-gold-400/80"></i> Über uns
+                                </a>
+                                <a href="kuechenphilosophie.html" class="block px-4 py-2.5 text-xs text-gold-400 font-semibold hover:bg-schlei-700/70 hover:text-gold-300 transition border-t border-white/5">
+                                    <i class="fa-solid fa-seedling mr-2 text-gold-400"></i> Küchenphilosophie
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <a href="#ab-8-personen" class="text-slate-200 hover:text-gold-400 transition">Ab 8 Personen</a>
                     <a href="#oeffnungszeiten" class="text-slate-200 hover:text-gold-400 transition">Öffnungszeiten</a>
                     <a href="#impressionen" class="text-slate-200 hover:text-gold-400 transition">Impressionen</a>
@@ -122,6 +137,7 @@
             <a href="#speisekarte" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Speisekarte</a>
             <a href="#specials" onclick="toggleMobileMenu()" class="block py-1.5 text-sm text-gold-400 hover:text-gold-300">↳ Specials</a>
             <a href="#ueber-uns" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Über uns</a>
+            <a href="kuechenphilosophie.html" onclick="toggleMobileMenu()" class="block py-1.5 text-sm text-gold-400 hover:text-gold-300">↳ Küchenphilosophie</a>
             <a href="#ab-8-personen" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Ab 8 Personen</a>
             <a href="#oeffnungszeiten" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Öffnungszeiten</a>
             <a href="#impressionen" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Impressionen</a>
@@ -216,9 +232,22 @@
                     </div>
                 </div>
 
-                <a href="#ueber-uns" class="glass-btn text-white font-bold px-6 py-3.5 rounded-lg text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 transition">
-                    <i class="fa-solid fa-heart text-gold-400"></i> Über Uns
-                </a>
+                <div class="relative group">
+                    <a href="#ueber-uns" class="glass-btn text-white font-bold px-6 py-3.5 rounded-lg text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 transition">
+                        <i class="fa-solid fa-heart text-gold-400"></i> Über Uns
+                        <i class="fa-solid fa-chevron-down text-[10px] opacity-80 transition-transform duration-200 group-hover:rotate-180"></i>
+                    </a>
+                    <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-30 text-left">
+                        <div class="bg-schlei-800/95 backdrop-blur-md border border-gold-500/35 rounded-xl shadow-2xl py-2 overflow-hidden">
+                            <a href="#ueber-uns" class="block px-4 py-2.5 text-xs text-slate-200 hover:bg-schlei-700/70 hover:text-gold-400 transition font-semibold">
+                                <i class="fa-solid fa-heart mr-2 text-gold-400/80"></i> Über uns
+                            </a>
+                            <a href="kuechenphilosophie.html" class="block px-4 py-2.5 text-xs text-gold-400 hover:bg-schlei-700/70 hover:text-gold-300 transition font-bold border-t border-white/5">
+                                <i class="fa-solid fa-seedling mr-2 text-gold-400"></i> Küchenphilosophie
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
                 <a href="#ab-8-personen" class="glass-btn text-white font-bold px-6 py-3.5 rounded-lg text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 transition">
                     <i class="fa-solid fa-users text-gold-400"></i> Ab 8 Personen

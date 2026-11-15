@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Küchenphilosophie | Restaurant Am Schleieck | Maasholm</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        schlei: {
+                            50: '#f0f7f9',
+                            100: '#e0eff3',
+                            700: '#1b4d5a',
+                            800: '#0f2931',
+                            900: '#07181e',
+                        },
+                        gold: {
+                            400: '#e5c158',
+                            500: '#d4af37',
+                            600: '#b89225',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .blur-card {
+            background: rgba(15, 41, 49, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.18);
+        }
+    </style>
+</head>
+<body class="bg-schlei-900 text-slate-100 font-sans selection:bg-gold-500 selection:text-schlei-900 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 bg-schlei-900/90 backdrop-blur-md border-b border-white/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="index.html" class="group block leading-tight">
+                    <span class="font-serif text-xl sm:text-2xl font-bold tracking-wider text-white block">AM SCHLEIECK</span>
+                    <span class="text-[9px] tracking-widest text-gold-400 uppercase font-light block whitespace-nowrap">Maasholm • Fusion Kitchen</span>
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center space-x-7 text-sm font-medium tracking-wide">
+                    <a href="index.html#konzept" class="text-slate-200 hover:text-gold-400 transition">Konzept</a>
+                    <div class="relative group">
+                        <a href="index.html#speisekarte" class="inline-flex items-center gap-1.5 text-slate-200 hover:text-gold-400 transition py-2">
+                            <span>Speisekarte</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] opacity-75 transition-transform duration-200 group-hover:rotate-180"></i>
+                        </a>
+                        <div class="absolute left-0 top-full pt-1 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="bg-schlei-800/95 backdrop-blur-md border border-gold-500/30 rounded-xl shadow-2xl py-2 overflow-hidden">
+                                <a href="index.html#speisekarte" class="block px-4 py-2.5 text-xs text-slate-200 hover:bg-schlei-700/70 hover:text-gold-400 transition">
+                                    <i class="fa-solid fa-utensils mr-2 text-gold-400/80"></i> Speisekarte
+                                </a>
+                                <a href="index.html#specials" class="block px-4 py-2.5 text-xs text-gold-400 font-semibold hover:bg-schlei-700/70 hover:text-gold-300 transition border-t border-white/5">
+                                    <i class="fa-solid fa-star mr-2 text-gold-400"></i> Specials
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <a href="index.html#ueber-uns" class="inline-flex items-center gap-1.5 text-gold-400 font-semibold transition py-2">
+                            <span>Über uns</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] opacity-75 transition-transform duration-200 group-hover:rotate-180"></i>
+                        </a>
+                        <div class="absolute left-0 top-full pt-1 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="bg-schlei-800/95 backdrop-blur-md border border-gold-500/30 rounded-xl shadow-2xl py-2 overflow-hidden">
+                                <a href="index.html#ueber-uns" class="block px-4 py-2.5 text-xs text-slate-200 hover:bg-schlei-700/70 hover:text-gold-400 transition">
+                                    <i class="fa-solid fa-heart mr-2 text-gold-400/80"></i> Über uns
+                                </a>
+                                <a href="kuechenphilosophie.html" class="block px-4 py-2.5 text-xs text-gold-400 font-semibold hover:bg-schlei-700/70 hover:text-gold-300 transition border-t border-white/5">
+                                    <i class="fa-solid fa-seedling mr-2 text-gold-400"></i> Küchenphilosophie
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="index.html#ab-8-personen" class="text-slate-200 hover:text-gold-400 transition">Ab 8 Personen</a>
+                    <a href="index.html#oeffnungszeiten" class="text-slate-200 hover:text-gold-400 transition">Öffnungszeiten</a>
+                    <a href="index.html#impressionen" class="text-slate-200 hover:text-gold-400 transition">Impressionen</a>
+                    <a href="index.html#reservierung" class="text-slate-200 hover:text-gold-400 transition">Reservieren</a>
+                    <a href="jobs.html" class="text-slate-200 hover:text-gold-400 transition">Jobs</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="text-slate-200 hover:text-gold-400 p-2" aria-label="Menü öffnen">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-schlei-800 border-b border-white/10 px-4 pt-3 pb-6 space-y-3 text-center">
+            <a href="index.html#konzept" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Konzept</a>
+            <a href="index.html#speisekarte" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Speisekarte</a>
+            <a href="index.html#specials" onclick="toggleMobileMenu()" class="block py-1.5 text-sm text-gold-400 hover:text-gold-300">↳ Specials</a>
+            <a href="index.html#ueber-uns" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Über uns</a>
+            <a href="kuechenphilosophie.html" onclick="toggleMobileMenu()" class="block py-1.5 text-sm text-gold-400 font-semibold">↳ Küchenphilosophie</a>
+            <a href="index.html#ab-8-personen" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Ab 8 Personen</a>
+            <a href="index.html#oeffnungszeiten" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Öffnungszeiten</a>
+            <a href="index.html#impressionen" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Impressionen</a>
+            <a href="index.html#reservierung" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Reservieren</a>
+            <a href="jobs.html" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Jobs</a>
+            <a href="index.html#reservierung" onclick="toggleMobileMenu()" class="inline-block mt-2 bg-gold-500 text-schlei-900 text-xs uppercase font-bold px-6 py-3 rounded">Tisch Reservieren</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto space-y-14">
+
+            <!-- Title -->
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="text-gold-400 text-xs font-bold uppercase tracking-widest mb-3 block">Handwerk, Regionalität &amp; Leidenschaft</span>
+                <h1 class="font-serif text-4xl sm:text-5xl font-bold text-white mb-4">Küchenphilosophie</h1>
+                <p class="font-serif italic text-xl text-gold-400 mb-6">Alles aus eigener Hand – mit gutem Gewissen genießen</p>
+                <div class="w-16 h-0.5 bg-gold-500 mx-auto"></div>
+            </div>
+
+            <!-- Philosophy Main Card -->
+            <div class="blur-card relative overflow-hidden rounded-3xl p-8 sm:p-12 border border-gold-500/30 shadow-2xl space-y-8">
+                <img src="/assets/aistudio/DRhByNECT62yH3U-7m1Yxw_0c06258a.jpeg"
+                     alt=""
+                     aria-hidden="true"
+                     class="absolute inset-0 w-full h-full object-cover object-center opacity-[0.26] pointer-events-none select-none">
+                <div class="absolute inset-0 bg-gradient-to-b from-schlei-900/30 via-schlei-900/25 to-schlei-900/55 pointer-events-none"></div>
+                <div class="relative z-10 prose prose-invert max-w-none text-slate-100 text-base sm:text-lg leading-relaxed space-y-5 drop-shadow-sm">
+                    <p class="text-lg sm:text-xl text-white font-medium">
+                        Im Restaurant Am Schleieck achten wir in unserer Küche ganz besonders auf regionale Produkte und höchste Qualität. Unser Anspruch ist klar: Alles, was sich selbst herstellen lässt, machen wir bei uns im Haus selber.
+                    </p>
+                    <p>
+                        Wir lassen uns von den interessantesten Kochtechniken und Geschmäckern aus aller Welt inspirieren und verbinden sie mit besten Produkten aus unserer Region. So entsteht unsere Speisekarte – weltoffen im Geschmack, regional verwurzelt und immer geprägt von großem Respekt vor den Lebensmitteln.
+                    </p>
+                    <p>
+                        Wir stellen unseren eigenen Käse her sowie unseren eigenen Schinken, Wurst und Salami.
+                    </p>
+                    <p>
+                        Um besonders tiefe, natürliche Geschmäcker in unsere Gerichte zu bringen, fermentieren wir Gemüse und Obst selbst. Dazu backen wir auch unser Brot und unsere Focaccia täglich selbst.
+                    </p>
+                    <p>
+                        Ebenso arbeiten wir mit viel Kreativität daran, besonders interessante und innovative vegetarische sowie vegane Gerichte zu entwickeln – fernab vom Üblichen.
+                    </p>
+                    <p>
+                        Wo immer es möglich ist, beziehen wir unseren Fisch direkt von einem Fischer aus Maasholm und räuchern unsere Fische selbst. Wir nutzen jede Möglichkeit, unser Essen frisch, ehrlich und gesund zuzubereiten – und versuchen, all das jeden Tag mit bestem Gewissen für unsere Gäste umzusetzen.
+                    </p>
+                    <p>
+                        Darüber hinaus bilden wir auch in unserer Küche aus und freuen uns darauf, unser Wissen und die Freude am echten Kochhandwerk an junge Leute weiterzugeben.
+                    </p>
+                </div>
+
+                <!-- Highlights Grid -->
+                <div class="relative z-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 pt-4 border-t border-white/10">
+                    <!-- Eigener Käse (mit Foto-Hintergrund & Galerie-Klick) -->
+                    <button type="button" onclick="openCategoryGallery('kaese')" class="relative overflow-hidden rounded-2xl p-4 sm:p-5 min-h-[265px] border border-gold-500/40 hover:border-gold-400 transition shadow-xl text-left flex flex-col justify-between group cursor-pointer">
+                        <img src="/assets/aistudio/uGlWhQa1R4SnHPFVy2vtlg_7a7686ad.jpeg"
+                             alt="Eigener Käse – handwerklich im Haus selbst hergestellt"
+                             class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-schlei-900/90 via-transparent to-schlei-900/30 group-hover:from-schlei-900/85 transition"></div>
+                        <div class="relative z-10 flex justify-center">
+                            <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider bg-schlei-900/80 text-gold-400 border border-gold-500/40 px-3.5 py-1 rounded-full backdrop-blur-sm shadow">
+                                <i class="fa-regular fa-images"></i> Bilder ansehen
+                            </span>
+                        </div>
+                        <div class="relative z-10 mt-auto pt-16">
+                            <h3 class="font-serif text-2xl font-bold text-white drop-shadow">Eigener Käse</h3>
+                        </div>
+                    </button>
+
+                    <!-- Schinken, Wurst & Salami -->
+                    <button type="button" onclick="openCategoryGallery('schinken')" class="relative overflow-hidden rounded-2xl p-4 sm:p-5 min-h-[265px] border border-gold-500/40 hover:border-gold-400 transition shadow-xl text-left flex flex-col justify-between group cursor-pointer">
+                        <img src="/assets/aistudio/B7E21FD7-EDA8-4C5E-A4BA-E7709FA30BEE_474c2138.JPG"
+                             alt="Schinken, Wurst &amp; Salami aus eigener Herstellung"
+                             class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-schlei-900/90 via-transparent to-schlei-900/30 group-hover:from-schlei-900/85 transition"></div>
+                        <div class="relative z-10 flex justify-center">
+                            <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider bg-schlei-900/80 text-gold-400 border border-gold-500/40 px-3.5 py-1 rounded-full backdrop-blur-sm shadow">
+                                <i class="fa-regular fa-images"></i> Bilder ansehen
+                            </span>
+                        </div>
+                        <div class="relative z-10 mt-auto pt-16">
+                            <h3 class="font-serif text-2xl font-bold text-white drop-shadow">Schinken und Salami</h3>
+                        </div>
+                    </button>
+
+                    <!-- Brot und Focaccia -->
+                    <button type="button" onclick="openCategoryGallery('brot')" class="relative overflow-hidden rounded-2xl p-4 sm:p-5 min-h-[265px] border border-gold-500/40 hover:border-gold-400 transition shadow-xl text-left flex flex-col justify-between group cursor-pointer">
+                        <img src="/assets/aistudio/P17d8K0BQuGvZrqzGWqRKQ_0749d781.jpeg"
+                             alt="Brot und Focaccia – täglich frisch im Haus gebacken"
+                             class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-schlei-900/90 via-transparent to-schlei-900/30 group-hover:from-schlei-900/85 transition"></div>
+                        <div class="relative z-10 flex justify-center">
+                            <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider bg-schlei-900/80 text-gold-400 border border-gold-500/40 px-3.5 py-1 rounded-full backdrop-blur-sm shadow">
+                                <i class="fa-regular fa-images"></i> Bilder ansehen
+                            </span>
+                        </div>
+                        <div class="relative z-10 mt-auto pt-16">
+                            <h3 class="font-serif text-2xl font-bold text-white drop-shadow">Brot und Focaccia</h3>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center pt-2">
+                <a href="index.html" class="inline-flex items-center gap-2 bg-schlei-800 hover:bg-schlei-700 text-gold-400 border border-gold-500/40 text-xs uppercase tracking-wider font-bold px-6 py-3 rounded-lg transition">
+                    <i class="fa-solid fa-arrow-left"></i> Zurück zur Startseite
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Kategorie-Galerie-Modal -->
+    <div id="categoryModal" class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4 backdrop-blur-md transition-all duration-300 opacity-0" onclick="closeCategoryModal()">
+        <div class="relative max-w-4xl w-full bg-schlei-900 border border-gold-500/30 rounded-3xl p-5 sm:p-8 shadow-2xl" onclick="event.stopPropagation()">
+            <div class="flex items-start justify-between gap-4 pb-4 mb-5 border-b border-white/10">
+                <div>
+                    <h3 id="galleryTitle" class="font-serif text-2xl sm:text-3xl font-bold text-gold-400"></h3>
+                    <p id="gallerySubtitle" class="text-xs sm:text-sm text-slate-300 mt-1"></p>
+                </div>
+                <button onclick="closeCategoryModal()" class="text-slate-300 hover:text-gold-400 text-2xl font-bold p-1 transition" aria-label="Schließen">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div id="galleryBody">
+                <div class="relative flex items-center justify-center bg-black/40 rounded-2xl overflow-hidden border border-white/10 min-h-[260px]">
+                    <button id="galleryPrevBtn" onclick="prevGalleryImage()" class="hidden absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-schlei-900/85 hover:bg-gold-500 text-white hover:text-schlei-900 border border-gold-500/40 flex items-center justify-center transition z-10" aria-label="Vorheriges Bild">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <img id="galleryMainImg" src="" alt="" class="max-w-full max-h-[65vh] object-contain mx-auto">
+                    <button id="galleryNextBtn" onclick="nextGalleryImage()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-schlei-900/85 hover:bg-gold-500 text-white hover:text-schlei-900 border border-gold-500/40 flex items-center justify-center transition z-10" aria-label="Nächstes Bild">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between mt-3 text-xs text-slate-400">
+                    <span id="galleryCaption" class="text-slate-200"></span>
+                    <span id="galleryCounter"></span>
+                </div>
+                <div id="galleryThumbs" class="flex flex-wrap gap-2.5 mt-4 justify-center"></div>
+            </div>
+
+            <div id="galleryEmpty" class="hidden py-12 text-center space-y-2">
+                <div class="w-14 h-14 rounded-2xl bg-gold-500/10 border border-gold-500/30 text-gold-400 flex items-center justify-center text-2xl mx-auto mb-3">
+                    <i class="fa-regular fa-images"></i>
+                </div>
+                <p class="text-white font-serif text-xl">Weitere Fotos folgen in Kürze</p>
+                <p class="text-slate-400 text-xs sm:text-sm max-w-md mx-auto">Hier erscheinen bald Eindrücke aus unserer eigenen Herstellung in der Küche.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-schlei-900 border-t border-white/10 py-10 text-slate-400 text-xs mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center items-center">
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="index.html#speisekarte" class="hover:text-gold-400 transition">Speisekarte</a>
+                <a href="index.html#oeffnungszeiten" class="hover:text-gold-400 transition">Öffnungszeiten</a>
+                <a href="index.html#reservierung" class="hover:text-gold-400 transition">Reservieren</a>
+                <a href="impressum.html" class="hover:text-gold-400 transition">Impressum</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        const CATEGORY_GALLERIES = {
+            kaese: {
+                title: 'Eigener Käse',
+                subtitle: 'Handwerklich im Haus selbst hergestellt – mit viel Geduld und bester regionaler Milch.',
+                images: [
+                    {
+                        src: '/assets/aistudio/uGlWhQa1R4SnHPFVy2vtlg_7a7686ad.jpeg',
+                        caption: 'Hausgemachte Käselaibe mit Kräutern aus eigener Herstellung'
+                    },
+                    {
+                        src: '/assets/aistudio/IGZby7_QR028WNKqtKlpIQ_e8f48f79.jpeg',
+                        caption: 'Vielfalt und Reifung unserer eigenen Käsesorten im Haus'
+                    },
+                    {
+                        src: '/assets/aistudio/uIMWfiFfQ1q3FAKA5kbAOA_287037fc.jpeg',
+                        caption: 'Gereifte Käselaibe mit natürlicher Rinde aus eigener Käserei'
+                    }
+                ]
+            },
+            schinken: {
+                title: 'Schinken und Salami',
+                subtitle: 'Aus eigener Herstellung im Haus.',
+                images: [
+                    {
+                        src: '/assets/aistudio/B7E21FD7-EDA8-4C5E-A4BA-E7709FA30BEE_474c2138.JPG',
+                        caption: 'Hausgemachter Schinken, Wurst und Salami bei der Reifung'
+                    },
+                    {
+                        src: '/assets/aistudio/IMG_1096_d16d4f48.jpg',
+                        caption: 'Luftgetrockneter Schinken, Wurst und Salami aus eigener Herstellung'
+                    },
+                    {
+                        src: '/assets/aistudio/20210122_125755_64e34299.jpg',
+                        caption: 'Im eigenen Räucherofen: Salami, Wurst, Fisch und Käse im Rauch'
+                    },
+                    {
+                        src: '/assets/aistudio/20210521_133035_b31cef76.jpg',
+                        caption: 'Eigener Schinken, Wurst und Salami im Anschnitt'
+                    }
+                ]
+            },
+            brot: {
+                title: 'Brot und Focaccia',
+                subtitle: 'Täglich frisch im Haus gebacken.',
+                images: [
+                    {
+                        src: '/assets/aistudio/P17d8K0BQuGvZrqzGWqRKQ_0749d781.jpeg',
+                        caption: 'Frisch gebackenes Brot aus der eigenen Küche'
+                    },
+                    {
+                        src: '/assets/aistudio/F55F0F72-EB5C-47A8-8C72-A1AA6BD2CFED_e97e076f.jpg',
+                        caption: 'Ofenfrische, knusprige Brote aus eigener Herstellung'
+                    },
+                    {
+                        src: '/assets/aistudio/IMG_1139_25e8161e.JPG',
+                        caption: 'Hausgemachte Focaccia mit Sesam und Kräutern'
+                    },
+                    {
+                        src: '/assets/aistudio/IMG_0174_ce3f88f5.jpg',
+                        caption: 'Frisch aus dem Ofen: helle Krustenbrote und Brötchen'
+                    },
+                    {
+                        src: '/assets/aistudio/20211228_130519_48bb7365.jpg',
+                        caption: 'Kräftige Körnerbrote mit Sesam und Sonnenblumenkernen'
+                    }
+                ]
+            }
+        };
+
+        let activeCategoryKey = null;
+        let activeImageIndex = 0;
+
+        function openCategoryGallery(categoryKey) {
+            const data = CATEGORY_GALLERIES[categoryKey];
+            if (!data) return;
+
+            activeCategoryKey = categoryKey;
+            activeImageIndex = 0;
+
+            document.getElementById('galleryTitle').textContent = data.title;
+            document.getElementById('gallerySubtitle').textContent = data.subtitle;
+
+            const galleryBody = document.getElementById('galleryBody');
+            const galleryEmpty = document.getElementById('galleryEmpty');
+
+            if (data.images.length === 0) {
+                galleryBody.classList.add('hidden');
+                galleryEmpty.classList.remove('hidden');
+            } else {
+                galleryBody.classList.remove('hidden');
+                galleryEmpty.classList.add('hidden');
+                renderGalleryView();
+            }
+
+            const modal = document.getElementById('categoryModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+            }, 10);
+        }
+
+        function renderGalleryView() {
+            const data = CATEGORY_GALLERIES[activeCategoryKey];
+            if (!data || data.images.length === 0) return;
+
+            const current = data.images[activeImageIndex];
+            const mainImg = document.getElementById('galleryMainImg');
+            mainImg.src = current.src;
+            mainImg.alt = current.caption || data.title;
+
+            document.getElementById('galleryCaption').textContent = current.caption || '';
+            document.getElementById('galleryCounter').textContent = `${activeImageIndex + 1} / ${data.images.length}`;
+
+            const prevBtn = document.getElementById('galleryPrevBtn');
+            const nextBtn = document.getElementById('galleryNextBtn');
+            if (data.images.length > 1) {
+                prevBtn.classList.remove('hidden');
+                nextBtn.classList.remove('hidden');
+            } else {
+                prevBtn.classList.add('hidden');
+                nextBtn.classList.add('hidden');
+            }
+
+            const thumbsContainer = document.getElementById('galleryThumbs');
+            thumbsContainer.innerHTML = '';
+            if (data.images.length > 1) {
+                data.images.forEach((img, idx) => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.onclick = () => {
+                        activeImageIndex = idx;
+                        renderGalleryView();
+                    };
+                    btn.className = `w-16 h-16 rounded-xl overflow-hidden border-2 transition ${idx === activeImageIndex ? 'border-gold-400 scale-105' : 'border-white/15 opacity-65 hover:opacity-100'}`;
+                    btn.innerHTML = `<img src="${img.src}" alt="" class="w-full h-full object-cover">`;
+                    thumbsContainer.appendChild(btn);
+                });
+            }
+        }
+
+        function prevGalleryImage() {
+            const data = CATEGORY_GALLERIES[activeCategoryKey];
+            if (!data || data.images.length <= 1) return;
+            activeImageIndex = (activeImageIndex - 1 + data.images.length) % data.images.length;
+            renderGalleryView();
+        }
+
+        function nextGalleryImage() {
+            const data = CATEGORY_GALLERIES[activeCategoryKey];
+            if (!data || data.images.length <= 1) return;
+            activeImageIndex = (activeImageIndex + 1) % data.images.length;
+            renderGalleryView();
+        }
+
+        function closeCategoryModal() {
+            const modal = document.getElementById('categoryModal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeCategoryModal();
+            } else if (e.key === 'ArrowLeft') {
+                prevGalleryImage();
+            } else if (e.key === 'ArrowRight') {
+                nextGalleryImage();
+            }
+        });
+    </script>
+</body>
+</html>
