@@ -83,7 +83,22 @@
                 <!-- Desktop Nav Links -->
                 <nav class="hidden md:flex items-center space-x-7 text-sm font-medium tracking-wide">
                     <a href="#konzept" class="text-slate-200 hover:text-gold-400 transition">Konzept</a>
-                    <a href="#speisekarte" class="text-slate-200 hover:text-gold-400 transition">Speisekarte</a>
+                    <div class="relative group">
+                        <a href="#speisekarte" class="inline-flex items-center gap-1.5 text-slate-200 hover:text-gold-400 transition py-2">
+                            <span>Speisekarte</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] opacity-75 transition-transform duration-200 group-hover:rotate-180"></i>
+                        </a>
+                        <div class="absolute left-0 top-full pt-1 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="bg-schlei-800/95 backdrop-blur-md border border-gold-500/30 rounded-xl shadow-2xl py-2 overflow-hidden">
+                                <a href="#speisekarte" class="block px-4 py-2.5 text-xs text-slate-200 hover:bg-schlei-700/70 hover:text-gold-400 transition">
+                                    <i class="fa-solid fa-utensils mr-2 text-gold-400/80"></i> Speisekarte
+                                </a>
+                                <a href="#specials" class="block px-4 py-2.5 text-xs text-gold-400 font-semibold hover:bg-schlei-700/70 hover:text-gold-300 transition border-t border-white/5">
+                                    <i class="fa-solid fa-star mr-2 text-gold-400"></i> Specials
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <a href="#ueber-uns" class="text-slate-200 hover:text-gold-400 transition">Über uns</a>
                     <a href="#ab-8-personen" class="text-slate-200 hover:text-gold-400 transition">Ab 8 Personen</a>
                     <a href="#oeffnungszeiten" class="text-slate-200 hover:text-gold-400 transition">Öffnungszeiten</a>
@@ -105,6 +120,7 @@
         <div id="mobileMenu" class="hidden md:hidden bg-schlei-800 border-b border-white/10 px-4 pt-3 pb-6 space-y-3 text-center">
             <a href="#konzept" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Konzept</a>
             <a href="#speisekarte" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Speisekarte</a>
+            <a href="#specials" onclick="toggleMobileMenu()" class="block py-1.5 text-sm text-gold-400 hover:text-gold-300">↳ Specials</a>
             <a href="#ueber-uns" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Über uns</a>
             <a href="#ab-8-personen" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Ab 8 Personen</a>
             <a href="#oeffnungszeiten" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Öffnungszeiten</a>
@@ -183,9 +199,22 @@
                     <i class="fa-solid fa-lightbulb text-gold-400"></i> Unser Konzept
                 </a>
 
-                <a href="#speisekarte" class="glass-btn text-white font-bold px-6 py-3.5 rounded-lg text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 transition">
-                    <i class="fa-solid fa-utensils text-slate-300"></i> Zur Speisekarte
-                </a>
+                <div class="relative group">
+                    <a href="#speisekarte" class="glass-btn text-white font-bold px-6 py-3.5 rounded-lg text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 transition">
+                        <i class="fa-solid fa-utensils text-slate-300"></i> Zur Speisekarte
+                        <i class="fa-solid fa-chevron-down text-[10px] opacity-80 transition-transform duration-200 group-hover:rotate-180"></i>
+                    </a>
+                    <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-30 text-left">
+                        <div class="bg-schlei-800/95 backdrop-blur-md border border-gold-500/35 rounded-xl shadow-2xl py-2 overflow-hidden">
+                            <a href="#speisekarte" class="block px-4 py-2.5 text-xs text-slate-200 hover:bg-schlei-700/70 hover:text-gold-400 transition font-semibold">
+                                <i class="fa-solid fa-utensils mr-2 text-gold-400/80"></i> Speisekarte ansehen
+                            </a>
+                            <a href="#specials" class="block px-4 py-2.5 text-xs text-gold-400 hover:bg-schlei-700/70 hover:text-gold-300 transition font-bold border-t border-white/5">
+                                <i class="fa-solid fa-star mr-2 text-gold-400"></i> Specials
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
                 <a href="#ueber-uns" class="glass-btn text-white font-bold px-6 py-3.5 rounded-lg text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 transition">
                     <i class="fa-solid fa-heart text-gold-400"></i> Über Uns
@@ -497,6 +526,30 @@
                         <i class="fa-solid fa-magnifying-glass-plus text-2xl"></i>
                     </div>
                 </div>
+                <!-- Bild 7 -->
+                <div class="rounded-2xl overflow-hidden border border-gold-500/20 shadow-2xl cursor-pointer group relative" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="/assets/aistudio/012094_6533e88c.jpg" 
+                         alt="Maasholm Impression 7" class="w-full h-44 sm:h-56 object-cover object-center group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-gold-400">
+                        <i class="fa-solid fa-magnifying-glass-plus text-2xl"></i>
+                    </div>
+                </div>
+                <!-- Bild 8 -->
+                <div class="rounded-2xl overflow-hidden border border-gold-500/20 shadow-2xl cursor-pointer group relative" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="/assets/aistudio/IMG_9956_03615916.jpg" 
+                         alt="Maasholm Impression 8" class="w-full h-44 sm:h-56 object-cover object-center group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-gold-400">
+                        <i class="fa-solid fa-magnifying-glass-plus text-2xl"></i>
+                    </div>
+                </div>
+                <!-- Bild 9 -->
+                <div class="rounded-2xl overflow-hidden border border-gold-500/20 shadow-2xl cursor-pointer group relative" onclick="openImageModal(this.querySelector('img').src)">
+                    <img src="/assets/aistudio/image_34f1bfa5.jpg" 
+                         alt="Maasholm Impression 9" class="w-full h-44 sm:h-56 object-cover object-center group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-gold-400">
+                        <i class="fa-solid fa-magnifying-glass-plus text-2xl"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -602,6 +655,14 @@
 
                         <div class="flex justify-between items-baseline border-b border-white/5 pb-4">
                             <div>
+                                <span class="font-serif text-lg font-bold text-white">Ribeye-Spieß</span>
+                                <p class="text-xs text-slate-300 mt-1">SH-Färse / Sauerrahm / Kartoffeln / Chilibohne</p>
+                            </div>
+                            <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">14,90 €</span>
+                        </div>
+
+                        <div class="flex justify-between items-baseline border-b border-white/5 pb-4">
+                            <div>
                                 <span class="font-serif text-lg font-bold text-white">Würziges Crispyhuhn</span>
                                 <p class="text-xs text-slate-300 mt-1">Nam Pla* / Mango / Limette / Rote Chili / Sesam</p>
                             </div>
@@ -685,6 +746,27 @@
                             </div>
                             <span class="font-serif text-gold-400 font-bold text-lg whitespace-nowrap ml-4">10,50 €</span>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Specials Section -->
+                <div id="specials" class="scroll-mt-28 blur-card rounded-2xl p-8 sm:p-10 border border-gold-500/40 bg-schlei-800/60 shadow-2xl">
+                    <h4 class="font-serif text-2xl sm:text-3xl font-bold text-gold-400 mb-6 pb-3 border-b border-gold-500/30 flex items-center justify-between">
+                        <span class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-star text-gold-400 text-xl"></i> Specials
+                        </span>
+                        <span class="text-xs font-sans text-slate-300 uppercase tracking-wider">Saisonal &amp; Fangfrisch</span>
+                    </h4>
+                    <div class="space-y-4 text-slate-200 text-sm sm:text-base leading-relaxed">
+                        <p>
+                            Unsere Specials werden saisonal bedingt – ganz nach aktuellem Fischfang und Saison – aus ausgewählten, frischen Produkten für Sie zubereitet.
+                        </p>
+                        <p class="text-slate-300">
+                            Da wir immer mit dem arbeiten, was Meer, Region und Jahreszeit gerade am besten zu bieten haben, wechselt unsere Specials-Auswahl regelmäßig und ändert sich öfter.
+                        </p>
+                        <p class="text-gold-400 font-serif italic text-lg pt-1">
+                            Fragen Sie bei Ihrem Besuch gerne unser Team nach den aktuellen Tages- und Saison-Specials!
+                        </p>
                     </div>
                 </div>
             </div>

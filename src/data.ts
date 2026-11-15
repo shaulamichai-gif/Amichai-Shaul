@@ -98,6 +98,16 @@ export const MENU_ITEMS: MenuItem[] = [
     accentNote: 'Knusprig & Saftig'
   },
   {
+    id: 'ribeye_spiess',
+    name: 'Ribeye-Spieß',
+    description: 'SH-Färse / Sauerrahm / Kartoffeln / Chilibohne',
+    price: 14.90,
+    category: 'sharing',
+    cuisine: 'ostsee',
+    ingredients: ['Schleswig-Holstein Färse Rind', 'Sauerrahm', 'Kartoffeln', 'Chilibohne'],
+    imageUrl: 'https://lh3.googleusercontent.com/d/1MFHMrUKlpd8lf2b4C6Db3BXHgbNunk_a'
+  },
+  {
     id: 'crispyhuhn',
     name: 'Würziges Crispyhuhn',
     description: 'Nam Pla* / Mango / Limette / Rote Chili / Sesam',
