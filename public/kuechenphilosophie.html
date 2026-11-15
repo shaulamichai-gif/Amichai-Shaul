@@ -171,53 +171,38 @@
 
                 <!-- Highlights Grid -->
                 <div class="relative z-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 pt-4 border-t border-white/10">
-                    <!-- Eigener Käse (mit Foto-Hintergrund & Galerie-Klick) -->
-                    <button type="button" onclick="openCategoryGallery('kaese')" class="relative overflow-hidden rounded-2xl p-4 sm:p-5 min-h-[265px] border border-gold-500/40 hover:border-gold-400 transition shadow-xl text-left flex flex-col justify-between group cursor-pointer">
+                    <!-- Eigener Käse -->
+                    <div class="relative overflow-hidden rounded-2xl p-4 sm:p-5 min-h-[265px] border border-gold-500/40 shadow-xl text-left flex flex-col justify-end">
                         <img src="/assets/aistudio/uGlWhQa1R4SnHPFVy2vtlg_7a7686ad.jpeg"
                              alt="Eigener Käse – handwerklich im Haus selbst hergestellt"
-                             class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-schlei-900/90 via-transparent to-schlei-900/30 group-hover:from-schlei-900/85 transition"></div>
-                        <div class="relative z-10 flex justify-center">
-                            <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider bg-schlei-900/80 text-gold-400 border border-gold-500/40 px-3.5 py-1 rounded-full backdrop-blur-sm shadow">
-                                <i class="fa-regular fa-images"></i> Bilder ansehen
-                            </span>
-                        </div>
+                             class="absolute inset-0 w-full h-full object-cover object-center">
+                        <div class="absolute inset-0 bg-gradient-to-t from-schlei-900/90 via-transparent to-schlei-900/20"></div>
                         <div class="relative z-10 mt-auto pt-16">
                             <h3 class="font-serif text-2xl font-bold text-white drop-shadow">Eigener Käse</h3>
                         </div>
-                    </button>
+                    </div>
 
                     <!-- Schinken, Wurst & Salami -->
-                    <button type="button" onclick="openCategoryGallery('schinken')" class="relative overflow-hidden rounded-2xl p-4 sm:p-5 min-h-[265px] border border-gold-500/40 hover:border-gold-400 transition shadow-xl text-left flex flex-col justify-between group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-2xl p-4 sm:p-5 min-h-[265px] border border-gold-500/40 shadow-xl text-left flex flex-col justify-end">
                         <img src="/assets/aistudio/B7E21FD7-EDA8-4C5E-A4BA-E7709FA30BEE_474c2138.JPG"
                              alt="Schinken, Wurst &amp; Salami aus eigener Herstellung"
-                             class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-schlei-900/90 via-transparent to-schlei-900/30 group-hover:from-schlei-900/85 transition"></div>
-                        <div class="relative z-10 flex justify-center">
-                            <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider bg-schlei-900/80 text-gold-400 border border-gold-500/40 px-3.5 py-1 rounded-full backdrop-blur-sm shadow">
-                                <i class="fa-regular fa-images"></i> Bilder ansehen
-                            </span>
-                        </div>
+                             class="absolute inset-0 w-full h-full object-cover object-center">
+                        <div class="absolute inset-0 bg-gradient-to-t from-schlei-900/90 via-transparent to-schlei-900/20"></div>
                         <div class="relative z-10 mt-auto pt-16">
                             <h3 class="font-serif text-2xl font-bold text-white drop-shadow">Schinken und Salami</h3>
                         </div>
-                    </button>
+                    </div>
 
                     <!-- Brot und Focaccia -->
-                    <button type="button" onclick="openCategoryGallery('brot')" class="relative overflow-hidden rounded-2xl p-4 sm:p-5 min-h-[265px] border border-gold-500/40 hover:border-gold-400 transition shadow-xl text-left flex flex-col justify-between group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-2xl p-4 sm:p-5 min-h-[265px] border border-gold-500/40 shadow-xl text-left flex flex-col justify-end">
                         <img src="/assets/aistudio/P17d8K0BQuGvZrqzGWqRKQ_0749d781.jpeg"
                              alt="Brot und Focaccia – täglich frisch im Haus gebacken"
-                             class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-schlei-900/90 via-transparent to-schlei-900/30 group-hover:from-schlei-900/85 transition"></div>
-                        <div class="relative z-10 flex justify-center">
-                            <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider bg-schlei-900/80 text-gold-400 border border-gold-500/40 px-3.5 py-1 rounded-full backdrop-blur-sm shadow">
-                                <i class="fa-regular fa-images"></i> Bilder ansehen
-                            </span>
-                        </div>
+                             class="absolute inset-0 w-full h-full object-cover object-center">
+                        <div class="absolute inset-0 bg-gradient-to-t from-schlei-900/90 via-transparent to-schlei-900/20"></div>
                         <div class="relative z-10 mt-auto pt-16">
                             <h3 class="font-serif text-2xl font-bold text-white drop-shadow">Brot und Focaccia</h3>
                         </div>
-                    </button>
+                    </div>
                 </div>
             </div>
 
@@ -229,46 +214,6 @@
 
         </div>
     </main>
-
-    <!-- Kategorie-Galerie-Modal -->
-    <div id="categoryModal" class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4 backdrop-blur-md transition-all duration-300 opacity-0" onclick="closeCategoryModal()">
-        <div class="relative max-w-4xl w-full bg-schlei-900 border border-gold-500/30 rounded-3xl p-5 sm:p-8 shadow-2xl" onclick="event.stopPropagation()">
-            <div class="flex items-start justify-between gap-4 pb-4 mb-5 border-b border-white/10">
-                <div>
-                    <h3 id="galleryTitle" class="font-serif text-2xl sm:text-3xl font-bold text-gold-400"></h3>
-                    <p id="gallerySubtitle" class="text-xs sm:text-sm text-slate-300 mt-1"></p>
-                </div>
-                <button onclick="closeCategoryModal()" class="text-slate-300 hover:text-gold-400 text-2xl font-bold p-1 transition" aria-label="Schließen">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <div id="galleryBody">
-                <div class="relative flex items-center justify-center bg-black/40 rounded-2xl overflow-hidden border border-white/10 min-h-[260px]">
-                    <button id="galleryPrevBtn" onclick="prevGalleryImage()" class="hidden absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-schlei-900/85 hover:bg-gold-500 text-white hover:text-schlei-900 border border-gold-500/40 flex items-center justify-center transition z-10" aria-label="Vorheriges Bild">
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </button>
-                    <img id="galleryMainImg" src="" alt="" class="max-w-full max-h-[65vh] object-contain mx-auto">
-                    <button id="galleryNextBtn" onclick="nextGalleryImage()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-schlei-900/85 hover:bg-gold-500 text-white hover:text-schlei-900 border border-gold-500/40 flex items-center justify-center transition z-10" aria-label="Nächstes Bild">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                </div>
-                <div class="flex items-center justify-between mt-3 text-xs text-slate-400">
-                    <span id="galleryCaption" class="text-slate-200"></span>
-                    <span id="galleryCounter"></span>
-                </div>
-                <div id="galleryThumbs" class="flex flex-wrap gap-2.5 mt-4 justify-center"></div>
-            </div>
-
-            <div id="galleryEmpty" class="hidden py-12 text-center space-y-2">
-                <div class="w-14 h-14 rounded-2xl bg-gold-500/10 border border-gold-500/30 text-gold-400 flex items-center justify-center text-2xl mx-auto mb-3">
-                    <i class="fa-regular fa-images"></i>
-                </div>
-                <p class="text-white font-serif text-xl">Weitere Fotos folgen in Kürze</p>
-                <p class="text-slate-400 text-xs sm:text-sm max-w-md mx-auto">Hier erscheinen bald Eindrücke aus unserer eigenen Herstellung in der Küche.</p>
-            </div>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer class="bg-schlei-900 border-t border-white/10 py-10 text-slate-400 text-xs mt-auto">
@@ -287,142 +232,6 @@
             const menu = document.getElementById('mobileMenu');
             menu.classList.toggle('hidden');
         }
-
-        const CATEGORY_GALLERIES = {
-            kaese: {
-                title: 'Eigener Käse',
-                subtitle: 'Handwerklich im Haus selbst hergestellt.',
-                images: [
-                    {
-                        src: '/assets/aistudio/uGlWhQa1R4SnHPFVy2vtlg_7a7686ad.jpeg',
-                        caption: 'Hausgemachter Käse aus eigener Herstellung'
-                    }
-                ]
-            },
-            schinken: {
-                title: 'Schinken und Salami',
-                subtitle: 'Aus eigener Herstellung im Haus.',
-                images: [
-                    {
-                        src: '/assets/aistudio/B7E21FD7-EDA8-4C5E-A4BA-E7709FA30BEE_474c2138.JPG',
-                        caption: 'Hausgemachter Schinken, Wurst und Salami bei der Reifung'
-                    }
-                ]
-            },
-            brot: {
-                title: 'Brot und Focaccia',
-                subtitle: 'Täglich frisch im Haus gebacken.',
-                images: [
-                    {
-                        src: '/assets/aistudio/P17d8K0BQuGvZrqzGWqRKQ_0749d781.jpeg',
-                        caption: 'Frisch gebackenes Brot aus der eigenen Küche'
-                    }
-                ]
-            }
-        };
-
-        let activeCategoryKey = null;
-        let activeImageIndex = 0;
-
-        function openCategoryGallery(categoryKey) {
-            const data = CATEGORY_GALLERIES[categoryKey];
-            if (!data) return;
-
-            activeCategoryKey = categoryKey;
-            activeImageIndex = 0;
-
-            document.getElementById('galleryTitle').textContent = data.title;
-            document.getElementById('gallerySubtitle').textContent = data.subtitle;
-
-            const galleryBody = document.getElementById('galleryBody');
-            const galleryEmpty = document.getElementById('galleryEmpty');
-
-            if (data.images.length === 0) {
-                galleryBody.classList.add('hidden');
-                galleryEmpty.classList.remove('hidden');
-            } else {
-                galleryBody.classList.remove('hidden');
-                galleryEmpty.classList.add('hidden');
-                renderGalleryView();
-            }
-
-            const modal = document.getElementById('categoryModal');
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-            }, 10);
-        }
-
-        function renderGalleryView() {
-            const data = CATEGORY_GALLERIES[activeCategoryKey];
-            if (!data || data.images.length === 0) return;
-
-            const current = data.images[activeImageIndex];
-            const mainImg = document.getElementById('galleryMainImg');
-            mainImg.src = current.src;
-            mainImg.alt = current.caption || data.title;
-
-            document.getElementById('galleryCaption').textContent = current.caption || '';
-            document.getElementById('galleryCounter').textContent = `${activeImageIndex + 1} / ${data.images.length}`;
-
-            const prevBtn = document.getElementById('galleryPrevBtn');
-            const nextBtn = document.getElementById('galleryNextBtn');
-            if (data.images.length > 1) {
-                prevBtn.classList.remove('hidden');
-                nextBtn.classList.remove('hidden');
-            } else {
-                prevBtn.classList.add('hidden');
-                nextBtn.classList.add('hidden');
-            }
-
-            const thumbsContainer = document.getElementById('galleryThumbs');
-            thumbsContainer.innerHTML = '';
-            if (data.images.length > 1) {
-                data.images.forEach((img, idx) => {
-                    const btn = document.createElement('button');
-                    btn.type = 'button';
-                    btn.onclick = () => {
-                        activeImageIndex = idx;
-                        renderGalleryView();
-                    };
-                    btn.className = `w-16 h-16 rounded-xl overflow-hidden border-2 transition ${idx === activeImageIndex ? 'border-gold-400 scale-105' : 'border-white/15 opacity-65 hover:opacity-100'}`;
-                    btn.innerHTML = `<img src="${img.src}" alt="" class="w-full h-full object-cover">`;
-                    thumbsContainer.appendChild(btn);
-                });
-            }
-        }
-
-        function prevGalleryImage() {
-            const data = CATEGORY_GALLERIES[activeCategoryKey];
-            if (!data || data.images.length <= 1) return;
-            activeImageIndex = (activeImageIndex - 1 + data.images.length) % data.images.length;
-            renderGalleryView();
-        }
-
-        function nextGalleryImage() {
-            const data = CATEGORY_GALLERIES[activeCategoryKey];
-            if (!data || data.images.length <= 1) return;
-            activeImageIndex = (activeImageIndex + 1) % data.images.length;
-            renderGalleryView();
-        }
-
-        function closeCategoryModal() {
-            const modal = document.getElementById('categoryModal');
-            modal.classList.add('opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeCategoryModal();
-            } else if (e.key === 'ArrowLeft') {
-                prevGalleryImage();
-            } else if (e.key === 'ArrowRight') {
-                nextGalleryImage();
-            }
-        });
     </script>
 </body>
 </html>
