@@ -103,7 +103,7 @@ export default function Footer({ onAdminToggle, isAdminVisible }: FooterProps) {
                     </p>
                     <p>
                       <strong>Vertreten durch:</strong><br />
-                      Inhaber Amichai Shaul
+                      Inhaberin Sabine Suhr-Shaul
                     </p>
                     <p>
                       <strong>Kontakt:</strong><br />
