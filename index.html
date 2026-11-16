@@ -67,6 +67,23 @@
             backdrop-filter: blur(16px);
             border: 1px solid rgba(212, 175, 55, 0.18);
         }
+        @keyframes winterpause-marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        .winterpause-track {
+            display: flex;
+            width: max-content;
+            animation: winterpause-marquee 32s linear infinite;
+            will-change: transform;
+        }
+        .winterpause-banner:hover .winterpause-track {
+            animation-play-state: paused;
+        }
     </style>
 </head>
 <body class="bg-schlei-900 text-slate-100 font-sans selection:bg-gold-500 selection:text-schlei-900">
@@ -155,8 +172,30 @@
         </div>
     </header>
 
-    <section class="relative min-h-screen flex flex-col justify-center items-center hero-bg pt-28 pb-16">
-        <div class="relative max-w-7xl mx-auto px-4 text-center z-10 my-auto">
+    <section class="relative min-h-screen flex flex-col justify-center items-center hero-bg pt-20 pb-16">
+        <!-- Winterpause Laufband (bei Wiedereröffnung einfach entfernen) -->
+        <div class="winterpause-banner w-full overflow-hidden bg-gold-500/15 border-y border-gold-400/50 backdrop-blur-sm py-2.5 z-10">
+            <div class="winterpause-track">
+                <div class="flex items-center shrink-0">
+                    <span class="inline-flex items-center gap-3 px-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-gold-400 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>Wir machen im Moment Winterpause.</span>
+                    <span class="inline-flex items-center gap-3 px-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-gold-400 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>Wir machen im Moment Winterpause.</span>
+                    <span class="inline-flex items-center gap-3 px-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-gold-400 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>Wir machen im Moment Winterpause.</span>
+                    <span class="inline-flex items-center gap-3 px-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-gold-400 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>Wir machen im Moment Winterpause.</span>
+                    <span class="inline-flex items-center gap-3 px-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-gold-400 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>Wir machen im Moment Winterpause.</span>
+                    <span class="inline-flex items-center gap-3 px-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-gold-400 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>Wir machen im Moment Winterpause.</span>
+                </div>
+                <div class="flex items-center shrink-0" aria-hidden="true">
+                    <span class="inline-flex items-center gap-3 px-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-gold-400 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>Wir machen im Moment Winterpause.</span>
+                    <span class="inline-flex items-center gap-3 px-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-gold-400 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>Wir machen im Moment Winterpause.</span>
+                    <span class="inline-flex items-center gap-3 px-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-gold-400 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>Wir machen im Moment Winterpause.</span>
+                    <span class="inline-flex items-center gap-3 px-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-gold-400 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>Wir machen im Moment Winterpause.</span>
+                    <span class="inline-flex items-center gap-3 px-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-gold-400 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>Wir machen im Moment Winterpause.</span>
+                    <span class="inline-flex items-center gap-3 px-6 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-gold-400 whitespace-nowrap"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span>Wir machen im Moment Winterpause.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 text-center z-10 my-auto pt-8 sm:pt-10">
             
             <!-- Main Motto line -->
             <h1 class="font-serif text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4 leading-tight whitespace-normal md:whitespace-nowrap">
