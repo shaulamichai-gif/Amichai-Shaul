@@ -132,18 +132,26 @@
         </div>
 
         <!-- Mobile Menu Dropdown -->
-        <div id="mobileMenu" class="hidden md:hidden bg-schlei-800 border-b border-white/10 px-4 pt-3 pb-6 space-y-3 text-center">
-            <a href="#konzept" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Konzept</a>
-            <a href="#speisekarte" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Speisekarte</a>
-            <a href="#specials" onclick="toggleMobileMenu()" class="block py-1.5 text-sm text-gold-400 hover:text-gold-300">↳ Specials</a>
-            <a href="#ueber-uns" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Über uns</a>
-            <a href="kuechenphilosophie.html" onclick="toggleMobileMenu()" class="block py-1.5 text-sm text-gold-400 hover:text-gold-300">↳ Küchenphilosophie</a>
-            <a href="#ab-8-personen" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Ab 8 Personen</a>
-            <a href="#oeffnungszeiten" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Öffnungszeiten</a>
-            <a href="#impressionen" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Impressionen</a>
-            <a href="#reservierung" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Reservieren</a>
-            <a href="jobs.html" onclick="toggleMobileMenu()" class="block py-2 text-slate-200 hover:text-gold-400">Jobs</a>
-            <a href="#reservierung" onclick="toggleMobileMenu()" class="inline-block mt-2 bg-gold-500 text-schlei-900 text-xs uppercase font-bold px-6 py-3 rounded">Tisch Reservieren</a>
+        <div id="mobileMenu" class="hidden md:hidden bg-schlei-800/95 backdrop-blur-md border-b border-white/15 text-center max-h-[calc(100dvh-5rem)] overflow-y-auto shadow-2xl">
+            <div class="divide-y divide-white/10">
+                <a href="#konzept" onclick="toggleMobileMenu()" class="block py-3.5 px-6 font-serif text-[22px] font-semibold tracking-wide text-slate-100 hover:text-gold-400 active:bg-schlei-700/50 transition">Konzept</a>
+                <div>
+                    <a href="#speisekarte" onclick="toggleMobileMenu()" class="block pt-3.5 pb-1.5 px-6 font-serif text-[22px] font-semibold tracking-wide text-slate-100 hover:text-gold-400 active:bg-schlei-700/50 transition">Speisekarte</a>
+                    <a href="#specials" onclick="toggleMobileMenu()" class="block pt-1 pb-3.5 px-6 font-serif text-base font-medium text-gold-400 hover:text-gold-300 transition">↳ Specials</a>
+                </div>
+                <div>
+                    <a href="#ueber-uns" onclick="toggleMobileMenu()" class="block pt-3.5 pb-1.5 px-6 font-serif text-[22px] font-semibold tracking-wide text-slate-100 hover:text-gold-400 active:bg-schlei-700/50 transition">Über uns</a>
+                    <a href="kuechenphilosophie.html" onclick="toggleMobileMenu()" class="block pt-1 pb-3.5 px-6 font-serif text-base font-medium text-gold-400 hover:text-gold-300 transition">↳ Küchenphilosophie</a>
+                </div>
+                <a href="#ab-8-personen" onclick="toggleMobileMenu()" class="block py-3.5 px-6 font-serif text-[22px] font-semibold tracking-wide text-slate-100 hover:text-gold-400 active:bg-schlei-700/50 transition">Ab 8 Personen</a>
+                <a href="#oeffnungszeiten" onclick="toggleMobileMenu()" class="block py-3.5 px-6 font-serif text-[22px] font-semibold tracking-wide text-slate-100 hover:text-gold-400 active:bg-schlei-700/50 transition">Öffnungszeiten</a>
+                <a href="#impressionen" onclick="toggleMobileMenu()" class="block py-3.5 px-6 font-serif text-[22px] font-semibold tracking-wide text-slate-100 hover:text-gold-400 active:bg-schlei-700/50 transition">Impressionen</a>
+                <a href="#reservierung" onclick="toggleMobileMenu()" class="block py-3.5 px-6 font-serif text-[22px] font-semibold tracking-wide text-slate-100 hover:text-gold-400 active:bg-schlei-700/50 transition">Reservieren</a>
+                <a href="jobs.html" onclick="toggleMobileMenu()" class="block py-3.5 px-6 font-serif text-[22px] font-semibold tracking-wide text-slate-100 hover:text-gold-400 active:bg-schlei-700/50 transition">Jobs</a>
+            </div>
+            <div class="px-5 py-5 border-t border-white/10">
+                <a href="#reservierung" onclick="toggleMobileMenu()" class="block w-full bg-gold-500 hover:bg-gold-400 text-schlei-900 text-sm uppercase tracking-widest font-bold px-6 py-4 rounded-lg shadow-lg transition">Tisch Reservieren</a>
+            </div>
         </div>
     </header>
 
@@ -957,7 +965,13 @@
     <script>
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
+            const btnIcon = document.querySelector('#mobileMenuBtn i');
             menu.classList.toggle('hidden');
+            if (btnIcon) {
+                const isOpen = !menu.classList.contains('hidden');
+                btnIcon.classList.toggle('fa-bars', !isOpen);
+                btnIcon.classList.toggle('fa-xmark', isOpen);
+            }
         }
 
         function openImageModal(src) {
